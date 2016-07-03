@@ -1,0 +1,28 @@
+@media (max-width: 800px) {
+    header h1 { 
+    	text-align: center; 
+    }
+
+    .wrapper.top .row .col-md-5 { 
+    	display: none; 
+    }
+    .wrapper.top .row .col-md-9 { 
+    	text-align: center; 
+    	padding-bottom: 20px; 
+    }
+
+    .action { 
+    	display: inline-block; 
+    	float: none; 
+    }
+    .action li { 
+    	float: none; 
+    	display: inline-block; 
+    }
+    .action li.active { 
+    	display: none; 
+    }
+    .action li:nth-child(2) { 
+    	border-left: none; 
+    }
+}

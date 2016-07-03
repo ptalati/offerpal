@@ -1,0 +1,67 @@
+<h1>Get A Free Account</h1>
+
+<div class="alert alert-danger" role="alert" ng-show="error.Status">{{error.Message}}</div>
+<div class="alert alert-success" role="alert" ng-show="success.Status">{{success.Message}}</div>
+
+<div class="row" ng-hide="success.Status">
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<div class="register">
+		    <form name="registerForm" class="form-container" ng-submit="registerForm.$valid && registerUser(register)">
+	            <div class="row">
+	            	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	            		<div class="form-group">
+		            		<label for="FirstName">First Name<span class="red">*</span>:</label>
+		            		<input type="text" class="form-control" id="FirstName" ng-model="register.FirstName" ng-required="true" placeholder="First Name" />
+	            		</div>
+	            	</div>
+	            	
+	            	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	            		<div class="form-group">
+		            		<label for="LastName">Last Name<span class="red">*</span>:</label>	
+		            		<input type="text" class="form-control" id="LastName" ng-model="register.LastName" ng-required="true" placeholder="Last Name" />
+	            		</div>
+	            	</div>
+	            </div>
+		
+		        <div class="form-group">
+		            <label for="email">Email<span class="red">*</span>:</label>
+		            <input type="email" class="form-control" id="email" ng-model="register.Email" ng-required="true" />
+		        </div>
+		
+		        <div class="form-group">
+		            <label for="password">Password<span class="red">*</span>:</label>
+		            <input type="password" class="form-control" id="password" ng-model="register.Password" ng-required="true" />
+		        </div>
+		
+		        <div class="form-group">
+		            <label for="confirm_password">Confirm Password<span class="red">*</span>:</label>
+		            <input type="password" class="form-control" id="confirm_password" ng-model="register.ConfirmPassword" ng-required="true" />
+		        </div>
+		
+		        <div class="form-group">
+		            <label for="phone">Phone<span class="red">*</span>:</label>
+		            <input type="tel" class="form-control" id="phone" ng-model="register.Phone" ng-required="true" />
+		        </div>
+		
+		        <input type="submit" class="btn btn-primary" value="Register" />
+		    </form>
+		</div>
+		
+		<p>&nbsp;</p>
+		
+		<p>Already have an account? <a ui-sref="login" ng-hide="success.Status">Login now!</a></p>
+	</div>
+	
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<h4>Why register?</h4>
+		
+		<ul>
+			<li>Receive email alerts from your favorite stores or categories - at the moment when they are available.</li>
+			<li>Get newsletters with the best deals & coupons.</li>
+			<li>Be informed of the latest features we introduce to make your shopping experience better.</li>
+			<li>... and above all - Never miss a deal!</li>
+		</ul>
+	</div>
+</div>
+
+<p>&nbsp;</p>

@@ -1,0 +1,27 @@
+<div ng-controller="OfferController" ng-init="loadFrontDefault()">
+	<div class="breadcrumb"><a ui-sref="welcome">Home</a> > <span ng-show="offer.Store.Id !== 0"><a ui-sref="store({storeSlug: offer.Store.Slug})">{{offer.Store.Name}}</a> > </span> {{offer.Name}}</div>
+	
+	<h1>{{offer.Name}}</h1>
+	
+	<div class="caption row">
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 text-center">
+			<div class="image-box"><img ng-src="{{imageLoad(offer.Image)}}" alt="{{offer.Name}}" /></div>
+		</div>
+		
+		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+			<p><i>From <a ui-sref="store({storeSlug: offer.Store.Slug})">{{offer.Store.Name}}</a></i></p>
+			
+			<hr />
+			
+			<p ng-bind-html="renderHtml(offer.Description)"></p>
+			
+			<hr />
+			
+			<product-type></product-type>
+			
+			<hr />
+			
+			<p><a ui-sref="redirectoffer({offerId: o.Id})" target="{{token !== null ? '_blank' : '_self'}}" class="btn btn-primary btn-shop" role="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;Shop Now</a></p>
+		</div>
+	</div>
+</div>

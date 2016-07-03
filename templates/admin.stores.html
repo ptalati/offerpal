@@ -1,0 +1,30 @@
+<div ng-controller="StoreController" ng-init="loadDefault()">
+	<h1>Stores <a class="btn btn-default" ui-sref="admin.store({storeId: 0})">+</a></h1>
+
+	<table datatable="" class="table table-hover table-striped table-bordered">
+	    <thead>
+		    <tr>
+		        <th>ID</th>
+		        <th>Name</th>
+		        <th>Slug</th>
+		        <th>Type</th>
+		        <th style="width: 100px;">&nbsp;</th>
+		    </tr>
+	    </thead>
+	    
+	    <tbody>
+		    <tr ng-repeat="s in stores">
+		        <td>{{s.Id}}</td>
+		        <td>{{s.Name}}</td>
+		        <td>{{s.Slug}}</td>
+		        <td>{{s.Type.Name}}</td>
+		        <td style="text-align: center;">
+		        	<span class="glyphicon glyphicon-asterisk {{s.Featured ? '' : 'disabled'}}" aria-hidden="true"></span>&nbsp;
+		        	<span class="glyphicon glyphicon-eye-open {{s.Active ? '' : 'disabled'}}" aria-hidden="true"></span>&nbsp;
+		        	<span class="glyphicon glyphicon-edit" aria-hidden="true" ui-sref="admin.store({storeId: s.Id})"></span>&nbsp;
+		        	<span class="glyphicon glyphicon-trash disabled" aria-hidden="true"></span>
+		        </td>
+		    </tr>
+	    </tbody>
+	</table>
+</div>

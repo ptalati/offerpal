@@ -1,0 +1,61 @@
+<div ng-controller="UserController" ng-init="loadDefault()">
+	<h1>Users <a class="btn btn-default" ui-sref="admin.user({userId: 0})">+</a></h1>
+
+	<form name="userForm" ng-submit="userForm.$valid && saveUser(user)">
+		<div class="form-group">
+			<label for="FirstName">First Name</label>
+			<input type="text" class="form-control" id="FirstName" placeholder="First Name" ng-model="user.FirstName" />
+		</div>
+		
+		<div class="form-group">
+			<label for="LastName">Lsat Name</label>
+			<input type="text" class="form-control" id="LastName" placeholder="Last Name" ng-model="user.LastName" />
+		</div>
+		
+		<div class="form-group">
+			<label for="Email">Email</label>
+			<input type="email" class="form-control" id="Email" placeholder="Email" ng-model="user.Email" />
+		</div>
+		
+		<div class="form-group">
+			<label for="Phone">Phone</label>
+			<input type="text" class="form-control" id="Phone" placeholder="Phone" ng-model="user.Phone" />
+		</div>
+		
+		<div class="form-group">
+			<label for="Type">Type</label>
+			<select class="form-control" id="Type" placeholder="Type" ng-model="user.Type" ng-options="ut.Name for ut in userTypes track by ut.Name"></select>
+		</div>
+		
+		<!--<div class="checkbox">
+			<label>
+				<input type="checkbox" ng-model="user.Active" /> Email Confirmed
+			</label>
+		</div>
+		
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" ng-model="user.PhoneConfirmed" /> Phone Confirmed
+			</label>
+		</div>-->
+		
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" ng-model="user.Locked" /> Locked
+			</label>
+		</div>
+		
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" ng-model="user.Active" /> Active
+			</label>
+		</div>
+		
+		<button type="submit" class="btn btn-default">Submit</button>
+		
+		<p>&nbsp;</p>
+		
+		<div class="alert alert-danger" role="alert" ng-show="error.Status">{{error.Message}}</div>
+		<div class="alert alert-success" role="alert" ng-show="success.Status">{{success.Message}}</div>
+	</form>
+</div>

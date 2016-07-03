@@ -1,0 +1,106 @@
+<div ng-controller="OfferController" ng-init="loadDefault()">
+	<h1>Offers <a class="btn btn-default" ui-sref="admin.offer({offerId: 0})">+</a></h1>
+
+	<form name="offerForm" ng-submit="offerForm.$valid && saveOffer(offer)">
+		<div class="form-group">
+			<label for="Name">Name</label>
+			<input type="text" class="form-control" id="Name" placeholder="Name" ng-model="offer.Name" />
+		</div>
+		
+		<div class="form-group">
+			<label for="Slug">Slug</label>
+			<input type="text" class="form-control" id="Slug" placeholder="Slug" ng-model="offer.Slug" />
+		</div>
+		
+		<div class="form-group">
+			<label for="Description">Description</label>
+			<textarea class="form-control" id="Description" ng-model="offer.Description"></textarea>
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group">
+					<label for="Category">Category</label>
+					<select class="form-control" id="Category" placeholder="Category" ng-model="offer.Category" ng-options="c.Name for c in categories track by c.Name"></select>
+				</div>
+			</div>
+			
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group">
+					<label for="Store">Store</label>
+					<select class="form-control" id="Store" placeholder="Store" ng-model="offer.Store" ng-options="s.Name for s in stores track by s.Name"></select>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="Type">Type</label>
+			<select class="form-control" id="Type" placeholder="Type" ng-model="offer.Type" ng-options="ot.Name for ot in offerTypes track by ot.Name"></select>
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group">
+					<label for="Price">Price</label>
+					<input type="text" class="form-control" id="Price" placeholder="Price" ng-model="offer.Price" />
+				</div>
+			</div>
+			
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group">
+					<label for="Value">Offer Price</label>
+					<input type="text" class="form-control" id="Value" placeholder="Offer Price" ng-model="offer.Value" />
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="Image">Image</label><br />
+			<input type="file" ngf-select ng-model="Image" name="file" ngf-accept="'image/*'" ng-show="imageUpload" />
+			<span class="picture-actions" ng-hide="imageUpload">
+				<img ngf-src="Image" class="thumb" />
+				<button type="button" class="btn btn-danger remove-picture" ng-click="removePicture()" ng-show="Image">X</button>
+			</span>
+		</div>
+		
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group">
+					<label for="StartDateTime">Start Date &amp; Time</label>
+					<input type="text" class="form-control" id="StartDateTime" placeholder="Start Date &amp; Time" ng-model="offer.StartDateTime" jqdatepicker />
+				</div>
+			</div>
+			
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="form-group">
+					<label for="EndDateTime">End Date &amp; Time</label>
+					<input type="text" class="form-control" id="EndDateTime" placeholder="End Date &amp; Time" ng-model="offer.EndDateTime" jqdatepicker />
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="ReferenceUrl">Url</label>
+			<input type="text" class="form-control" id="ReferenceUrl" placeholder="Store Product Url" ng-model="offer.ReferenceUrl" />
+		</div>
+		
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" ng-model="offer.Featured" /> Featured
+			</label>
+		</div>
+		
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" ng-model="offer.Active" /> Active
+			</label>
+		</div>
+		
+		<button type="submit" class="btn btn-default">Submit</button>
+		
+		<p>&nbsp;</p>
+		
+		<div class="alert alert-danger" role="alert" ng-show="error.Status">{{error.Message}}</div>
+		<div class="alert alert-success" role="alert" ng-show="success.Status">{{success.Message}}</div>
+	</form>
+</div>

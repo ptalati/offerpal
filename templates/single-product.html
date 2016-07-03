@@ -1,0 +1,13 @@
+<span ng-class="{featured: offer.Featured}"></span>
+
+<a ui-sref="offer({offerSlug: offer.Slug})" title="{{offer.Name}}" class="image"><img ng-src="{{imageLoad(offer.Image)}}" alt="{{offer.Name}}" /></a>
+
+<h3><a ui-sref="offer({offerSlug: offer.Slug})" title="{{offer.Name}}">{{offer.Name | limitTo:34}}...</a></h3>
+
+<div class="caption">
+	<p><i>From <a ui-sref="store({storeSlug: offer.Store.Slug})">{{offer.Store.Name}}</a></i></p>
+	
+	<product-type></product-type>
+	
+	<p><a ui-sref="redirectoffer({offerId: offer.Id})" target="{{token !== null ? '_blank' : '_self'}}" class="btn btn-primary btn-shop" role="button"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;Shop Now</a></p>
+</div>

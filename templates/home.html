@@ -1,0 +1,54 @@
+<div class="featured-stores">
+	<div class="move-actions">
+        <a href="javascript:void(0);" class="left"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+        <a href="javascript:void(0);" class="right"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+    </div>
+    
+	<h2><a>Featured Stores</a></h2>
+	
+	<ul id="featured-stores">
+		<li ng-repeat="s in stores | filter:{Featured: true}">
+			<a ui-sref="store({storeSlug: s.Slug})" title="{{s.Name}}"><img ng-src="{{imageLoad(s.Logo)}}" alt="{{s.Name}}" /><p>{{s.Slogan}}</p></a>
+		</li>
+	</ul>
+	
+	<div class="clearfix"></div>
+</div>
+
+<div class="featured-products">
+	<h2><a>Featured Offers</a></h2>
+	
+	<div class="products">
+		<div class="thumbnail product" ng-repeat="offer in featuredOffers">
+			<product></product>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+</div>
+
+<div class="recent-products">
+	<h2><a>Recent Offers</a></h2>
+	
+	<div class="products">
+		<div class="thumbnail product" ng-repeat="offer in offers">
+			<product></product>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+    	angular.element('#RootController').scope().refreshSlider();
+    	
+        $(".move-actions .left").click(function () {
+            $(".lSAction .lSPrev").click();
+        });
+
+        $(".move-actions .right").click(function () {
+            $(".lSAction .lSNext").click();
+        });
+    });
+</script>

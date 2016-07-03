@@ -1,0 +1,17 @@
+<div ng-controller="CategoryController" ng-init="loadFrontDefault()">
+	<div class="breadcrumb"><a ui-sref="welcome">Home</a> > <span ng-show="category.Parent.Parent.Id !== 0"><a ui-sref="category({categorySlug: category.Parent.Parent.Slug})">{{category.Parent.Parent.Name}}</a> > </span><span ng-show="category.Parent.Id !== 0"><a ui-sref="category({categorySlug: category.Parent.Slug})">{{category.Parent.Name}}</a> > </span>{{category.Name}}</div>
+	
+	<h1>{{category.Name}}</h1>
+	
+	<div class="products">
+		<div class="thumbnail product" ng-repeat="offer in offers">
+			<product></product>
+		</div>
+	</div>
+	
+	<div ng-show="offers.length === 0">
+		<p>We always try to get you as many offers as possible, but we do not have any offers for this category at the moment. Please check back again later.</p>
+		
+		<p>Sorry once again.</p>
+	</div>
+</div>

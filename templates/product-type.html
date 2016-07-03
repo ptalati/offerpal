@@ -1,0 +1,48 @@
+<p ng-show="offer.Type.Id === 1">
+    <span class="offer_price">Exclusive<br />Offer</span>
+</p>
+
+<p ng-show="offer.Type.Id === 2">
+	<span class="mrp">Discount</span>
+    <span class="offer_price">{{offer.Value}}%</span>
+</p>
+
+<p ng-show="offer.Type.Id === 3">
+	<span class="mrp">Minimum</span>
+    <span class="offer_price">{{offer.Value}}% OFF</span>
+</p>
+
+<p ng-show="offer.Type.Id === 4">
+	<span class="mrp">Discount Upto</span>
+    <span class="offer_price">{{offer.Value | currency:"&#8377;":2}}</span>
+</p>
+
+<p ng-show="offer.Type.Id === 5">
+	<span class="mrp">Starting From</span>
+    <span class="offer_price">{{offer.Value | currency:"&#8377;":2}}</span>
+</p>
+
+<p ng-show="offer.Type.Id === 6">
+	<span class="mrp">Flat Discount</span>
+    <span class="offer_price">{{offer.Value | currency:"&#8377;":2}}</span>
+</p>
+
+<p ng-show="offer.Type.Id === 7">
+	<span class="mrp">Under</span>
+    <span class="offer_price">{{offer.Value | currency:"&#8377;":2}}</span>
+</p>
+
+<p ng-show="offer.Type.Id === 8">
+       <span class="mrp line-through">Price: {{offer.Price | currency:"&#8377;":2}}</span>
+       <span class="offer_price">Sale: {{offer.Value | currency:"&#8377;":2}}</span>
+</p>
+
+<p ng-show="offer.Type.Id === 9">
+	<span class="mrp">@ Just</span>
+    <span class="offer_price">{{offer.Value | currency:"&#8377;":2}}</span>
+</p>
+
+<p ng-show="offer.Type.Id === 10">
+	<span class="mrp">Coupon Code</span>
+    <span class="offer_price">{{offer.Value}}</span>
+</p>

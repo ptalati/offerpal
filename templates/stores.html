@@ -1,0 +1,13 @@
+<div>
+	<div class="breadcrumb"><a ui-sref="welcome">Home</a> > Stores</div>
+	
+	<h1>Stores</h1>
+	
+	<div class="stores">
+		<ul>
+			<li ng-repeat="s in stores">
+				<a ui-sref="store({storeSlug: s.Slug})" title="{{s.Name}}"><img ng-src="{{imageLoad(s.Logo)}}" alt="{{s.Name}}" /><p>{{s.Slogan}}</p></a>
+			</li>
+		</ul>
+	</div>
+</div>

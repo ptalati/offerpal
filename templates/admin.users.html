@@ -1,0 +1,41 @@
+<div ng-controller="UserController" ng-init="loadDefault()">
+	<h1>Users <a class="btn btn-default" ui-sref="admin.user({userId: 0})">+</a></h1>
+	
+	<a href="https://accounts.google.com/o/oauth2/auth?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A51096%2Foauth2callback&client_id=648875415952-t9ceu17r53ors9hsj8s30irhk1026mfl.apps.googleusercontent.com&scope=https%3A%2F%2Fmail.google.com%2F&access_type=offline&approval_prompt=force&state=b08fd3752ae338af086a4369611fa83f&login_hint=info@offerpal.in">Grant Permission</a>
+	
+	<table datatable="" class="table table-hover table-striped table-bordered">
+	    <thead>
+		    <tr>
+		        <th>ID</th>
+		        <th>Name</th>
+		        <th>Email</th>
+		        <th>Phone</th>
+		        <th>Type</th>
+		        <th>&nbsp;</th>
+		        <th style="width: 150px;">&nbsp;</th>
+		    </tr>
+	    </thead>
+	    
+	    <tbody>
+		    <tr ng-repeat="u in users">
+		        <td>{{u.Id}}</td>
+		        <td>{{u.FirstName}} {{u.LastName}}</td>
+		        <td>{{u.Email}}</td>
+		        <td>{{u.Phone}}</td>
+		        <td>{{u.Type.Name}}</td>
+		        <td style="text-align: center;">
+		        	<span ng-show="!u.EmailConfirmed"><a href="javascript:void(0);" ng-click="resendEmail(u)" title="Resend Confirmation Email"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span></a></span>&nbsp;
+		        	<span ng-show="!u.EmailConfirmed"><a href="javascript:void(0);" ng-click="resetPassword(u)" title="Reset Password"><span class="glyphicon glyphicon-random" aria-hidden="true"></span></a></span>
+		        </td>
+		        <td style="text-align: center;">
+		        	<span class="glyphicon glyphicon-envelope {{u.EmailConfirmed ? '' : 'disabled'}}" aria-hidden="true" title="Email Confirmed: {{u.EmailConfirmed}}"></span>&nbsp;
+		        	<span class="glyphicon glyphicon-phone {{u.PhoneConfirmed ? '' : 'disabled'}}" aria-hidden="true" title="Phone Confirmed: {{u.PhoneConfirmed}}"></span>&nbsp;
+		        	<span class="glyphicon glyphicon-lock {{u.Locked ? '' : 'disabled'}}" aria-hidden="true" title="Locked: {{u.Locked}}"></span>&nbsp;
+		        	<span class="glyphicon glyphicon-eye-open {{u.Active ? '' : 'disabled'}}" aria-hidden="true" title="Active: {{u.Active}}"></span>&nbsp;
+		        	<span class="glyphicon glyphicon-edit" aria-hidden="true" ui-sref="admin.user({userId: u.Id})"></span>&nbsp;
+		        	<span class="glyphicon glyphicon-trash disabled" aria-hidden="true"></span>
+		        </td>
+		    </tr>
+	    </tbody>
+	</table>
+</div>

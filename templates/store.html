@@ -1,0 +1,31 @@
+<div ng-controller="StoreController" ng-init="loadFrontDefault()">
+	<div class="breadcrumb"><a ui-sref="welcome">Home</a> > <a ui-sref="stores">Stores</a> > {{store.Name}}</div>
+	
+	<h1>{{store.Name}}</h1>
+	
+	<div class="row">
+	  	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+	    	<div class="image-box"><img ng-src="{{imageLoad(store.Logo)}}" alt="{{store.Name}}" /></div>
+	  	</div>
+	  	
+	  	<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+	  		<p ng-bind-html="renderHtml(store.Description)"></p>
+	  	</div>
+	</div>
+	
+	<a ui-sref="redirectstore({storeId: store.Id})" target="{{token !== null ? '_blank' : '_self'}}" class="btn btn-success">Go to {{store.Name}} <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
+	
+	<hr />
+	
+	<div class="products">
+		<div class="thumbnail product" ng-repeat="offer in offers">
+			<product></product>
+		</div>
+	</div>
+	
+	<div ng-show="offers.length === 0">
+		<p>We always try to get you as many offers as possible, but we do not have any offers for this category at the moment. Please check back again later.</p>
+		
+		<p>Sorry once again.</p>
+	</div>
+</div>
