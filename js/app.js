@@ -19,15 +19,15 @@
       'product-type-template'
   	]);
 
-    app.constant('baseUrl', 'http://localhost:402/');
+    //app.constant('baseUrl', 'http://localhost:402/');
     //app.constant('baseUrl', 'http://localhost:51096/');
-    //app.constant('baseUrl', 'http://api.offerpal.in/');
+    app.constant('baseUrl', 'http://api.offerpal.in/');
     app.constant('isMobile', navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i));
     
     app.config([
         'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
             cfpLoadingBarProvider.includeSpinner = true;
-            cfpLoadingBarProvider.spinnerTemplate = '<div id="loading-bar-spinner"><div class="spinner"><img src="/images/logo.png" /> Loading...</div></div>';
+            cfpLoadingBarProvider.spinnerTemplate = '<div id="loading-bar-spinner"><div class="spinner"><img src="http://beta.offerpal.in/images/logo.png" /> Loading...</div></div>';
         }
     ]);
 
