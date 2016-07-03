@@ -73,6 +73,7 @@
 	.mobile-panel {
 		background: #444;
 		color: #fff;
+		overflow: scroll;
 	}
 	.mobile-panel .content {
 		display: block;
