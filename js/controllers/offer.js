@@ -60,6 +60,8 @@
                 $http.get(baseUrl + "api/offer?slug=" + offerSlug).then(function (results) {
         		    $scope.offer = results.data;
         		    
+        		    $scope.page.setTitle($scope.offer.Store.Name + " - " + $scope.offer.Name);
+        		    
         		    if ($scope.offer.Image !== '') {
         		    	$scope.Image = $scope.imageLoad($scope.offer.Image);
         		    	$scope.imageUpload = false;

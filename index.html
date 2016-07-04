@@ -41,6 +41,7 @@
 	<script type="text/javascript" src="http://beta.offerpal.in/js/controllers/store.js"></script>
 	<script type="text/javascript" src="http://beta.offerpal.in/js/controllers/offer.js"></script>
 	<script type="text/javascript" src="http://beta.offerpal.in/js/controllers/user.js"></script>
+	<script type="text/javascript" src="http://beta.offerpal.in/js/controllers/activity.js"></script>
 	<script type="text/javascript" src="http://beta.offerpal.in/js/directives/datepicker.js"></script>
 	<script type="text/javascript" src="http://beta.offerpal.in/js/directives/product.js"></script>
 	<script type="text/javascript" src="http://beta.offerpal.in/js/directives/product-type.js"></script>
@@ -103,8 +104,8 @@
 							</button>
 							
 							<ul class="dropdown-menu">
-								<li><a href="#">Account</a></li>
-						    	<li><a href="#">Activity</a></li>
+								<li><a ui-sref="account">Account</a></li>
+						    	<li><a ui-sref="account.activities">Activity</a></li>
 						    	<li role="separator" class="divider"></li>
 						    	<li><a href="#">My Wallet</a></li>
 						    	<li><a href="#">Reedem</a></li>
@@ -206,8 +207,8 @@
             </ul>
             
             <ul id="actionMenu" ng-show="token !== null">
-            	<li><a href="#">Account</a></li>
-		    	<li><a href="#">Activity</a></li>
+            	<li><a ui-sref="account">Account</a></li>
+				<li><a ui-sref="account.activities">Activity</a></li>
 		    	<li><a href="#">My Wallet</a></li>
 		    	<li><a href="#">Reedem</a></li>
 		    	<li><a ui-sref="logout">Logout</a></li>
@@ -251,11 +252,13 @@
 		function openExternalBrowser(elem) {
 			var url = elem.getAttribute("data-url");
 			
-			console.log(url);
-			
-			window.open(url, '_system');
-			
-			return false;
+			if (url.indexOf("http") !== -1) {
+				window.open(url, '_system');
+				
+				return false;
+			} else {
+				window.location = url;
+			}
 		}
 	</script>
 </body>

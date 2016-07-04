@@ -1,5 +1,27 @@
 <div ng-controller="OfferController" ng-init="loadFrontDefault()">
 	<div class="breadcrumb"><a ui-sref="welcome">Home</a> > Redirect to {{offer.Store.Name}}</div>
 	
-	<p>&nbsp;</p>
+	<div class="content text-center">
+		<p>&nbsp;</p>
+		
+		<p>
+			<span class="box"><img ng-src="{{imageLoad(offer.Store.Logo)}}" alt="{{offer.Store.Name}}" /></span>
+		</p>
+		
+		<p>&nbsp;</p>
+		
+		<p>Transferring you to <strong>{{offer.Store.Name}}</strong> in <strong>{{counter}}</strong> seconds</p>
+		
+		<hr />
+		
+		<p>Earn {{offer.Store.Slogan}}</p>
+	
+		<p>Please allow upto <strong>24-48 hours</strong> for cashback to track in your Offerpal wallet</p>
+	
+		<h3>Happy Savings</h3>
+		
+		<hr />
+		
+		<p><a href="javascript:void(0);" ng-click="redirectUrl()">Click here</a> if you are not automatically redirected within 5 seconds.</p>
+	</div>
 </div>

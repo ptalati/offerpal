@@ -13,6 +13,7 @@
       'store-controller',
       'offer-controller',
       'user-controller',
+      'activity-controller',
       'jqdatepicker',
       'category-filter',
       'product-template',
@@ -24,6 +25,8 @@
     //app.constant('baseUrl', 'http://localhost:51096/');
     app.constant('baseUrl', 'http://api.offerpal.in/');
     app.constant('isMobile', navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i));
+    //app.constant('webUrl', 'http://localhost:403/');
+	app.constant('webUrl', 'http://beta.offerpal.in/');
     
     app.config([
         'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
@@ -98,6 +101,9 @@
             }).state("admin.user", {
                 url: "/users/u/:userId",
                 templateUrl: 'templates/admin.user.html',
+            }).state("admin.activities", {
+                url: "/activities",
+                templateUrl: 'templates/admin.activities.html',
             }).state("category", {
                 url: "/category/:categorySlug",
                 templateUrl: 'templates/category.html'
@@ -111,7 +117,7 @@
                 url: "/offer/:offerSlug",
                 templateUrl: 'templates/offer.html'
             }).state("redirectstore", {
-                url: "/redirect/store/:storeId",
+                url: "/redirect/store/:storeId/:token",
                 templateUrl: 'templates/redirect.store.html',
                 controller: function ($scope, baseUrl, $state) {
                 	if (!localStorage["offerpal_token"]) {
@@ -119,13 +125,26 @@
                     }
                 }
             }).state("redirectoffer", {
-                url: "/redirect/offer/:offerId",
+                url: "/redirect/offer/:offerId/:token",
                 templateUrl: 'templates/redirect.offer.html',
                 controller: function ($scope, baseUrl, $state) {
                 	if (!localStorage["offerpal_token"]) {
                         $state.go('login');
                     }
                 }
+            }).state("account", {
+                url: "/account",
+                templateUrl: 'templates/account.html',
+                controller: function ($scope, baseUrl, $state) {
+                	$scope.page.setTitle("Account");
+                	
+                	if (!localStorage["offerpal_token"]) {
+                        $state.go('login');
+                    }
+                }
+            }).state("account.activities", {
+                url: "/activities",
+                templateUrl: 'templates/activities.html'
             });
 
             $urlRouterProvider.otherwise(function ($injector, $location) {
@@ -155,8 +174,8 @@
     }]);
 
 	app.controller('RootController', [
-        '$scope', '$http', '$log', '$interval', '$rootScope', 'baseUrl', 'isMobile', '$location', '$window', '$sce', '$state', 
-        function ($scope, $http, $log, $interval, $rootScope, baseUrl, isMobile, $location, $window, $sce, $state) {
+        '$scope', '$http', '$log', '$interval', '$rootScope', 'baseUrl', 'webUrl', 'isMobile', '$location', '$window', '$sce', '$state', '$timeout',
+        function ($scope, $http, $log, $interval, $rootScope, baseUrl, webUrl, isMobile, $location, $window, $sce, $state, $timeout) {
         	$scope.categories = [];
         	$scope.stores = [];
         	$scope.offers = [];
@@ -165,6 +184,7 @@
         	$scope.mobile = isMobile;
         	$scope.menu = false;
         	$scope.actionMenu = false;
+        	$scope.counter = 5;
         	
 	        $scope.fetchCategories = function() {
 	        	$http.get(baseUrl + "api/category").then(function (results) {
@@ -241,6 +261,7 @@
                 console.log($location.path());
                 
                 if ($location.path() === '/' || $location.path().indexOf("admin") !== -1) $scope.page.setTitle('Cashback Offers, Discount Coupons, Best Online Deals');
+                if ($location.path().indexOf("redirect") !== -1) var countDown = $timeout($scope.onCountDown,1000);
 
                 $scope.loadData();
             });
@@ -287,8 +308,52 @@
             };
             
             $scope.redirecToOfer = function(offer) {
-            	return "http://beta.offerpal.in/" + $state.href('redirectoffer', {offerId: offer.Id});
+            	if (!localStorage["offerpal_token"]) {
+            		return $state.href('login');
+            	}
+            	
+            	return webUrl + $state.href('redirectoffer', {offerId: offer.Id, token: $scope.token.Token});
             };
+            
+            $scope.redirecToStore = function(store) {
+            	if (!localStorage["offerpal_token"]) {
+            		return $state.href('login');
+            	}
+            	
+            	return webUrl + $state.href('redirectstore', {storeId: store.Id, token: $scope.token.Token});
+            };
+        	
+            $scope.onCountDown = function(){
+                $scope.counter--;
+                
+                countDown = $timeout($scope.onCountDown, 1000);
+            };
+
+            $scope.stop = function(){
+                $timeout.cancel(countDown);
+            };
+            
+            $scope.$watch('counter', function (newVal, oldVal) {
+            	if ($scope.counter === 0) {
+            		$scope.stop();
+            		
+            		$scope.redirectUrl();
+            	}
+            }, true);
+            
+            $scope.redirectUrl = function() {
+            	var redirectParam = "";
+            	
+            	console.log($state.params.offerId);
+            	console.log($state.params.storeId);
+            	
+            	if (typeof $state.params.offerId !== "undefined") redirectParam = "&offerId=" + $state.params.offerId;
+        		if (typeof $state.params.storeId !== "undefined") redirectParam = "&storeId=" + $state.params.storeId;
+            	
+            	$http.get(baseUrl + "api/account/redirect?token=" + $scope.token.Token + redirectParam).then(function (results) {
+        		    window.location = results.data;
+		        });
+            }
 	    }
 	]);
 })();

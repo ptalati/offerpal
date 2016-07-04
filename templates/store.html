@@ -13,7 +13,7 @@
 	  	</div>
 	</div>
 	
-	<a ui-sref="redirectstore({storeId: store.Id})" target="{{token !== null ? '_blank' : '_self'}}" class="btn btn-success">Go to {{store.Name}} <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
+	<a href="javascript:void(0);" onclick="openExternalBrowser(this)" data-redirect="true" data-url="{{redirecToStore(store)}}" class="btn btn-success">Go to {{store.Name}} <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
 	
 	<hr />
 	

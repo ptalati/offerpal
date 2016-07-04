@@ -1,0 +1,22 @@
+<div>
+	<div class="breadcrumb"><a ui-sref="welcome">Home</a> > Account</div>
+	
+	<p>&nbsp;</p>
+	
+	<div class="row">
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+			<div class="list-group">
+				<a ui-sref-active-eq="active" ui-sref="account" class="list-group-item">Account</a>
+				<a ui-sref-active-eq="active" ui-sref=".activities" class="list-group-item">Activities</a>
+				<a ui-sref-active-eq="active" ui-sref=".wallet" class="list-group-item">Wallet</a>
+				<a ui-sref-active-eq="active" ui-sref=".redeem" class="list-group-item">Redeem</a>
+			</div>
+		</div>
+		
+		<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+			<div ui-view>
+				<h1>Account</h1>
+			</div>
+		</div>
+	</div>
+</div>

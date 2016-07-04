@@ -495,6 +495,7 @@ footer .copyright {
 
 .featured-stores {
     position: relative;
+    margin-bottom: 20px;
 }
 .featured-stores .lSAction a {
     display: none;
@@ -1023,4 +1024,16 @@ h4 {
 #loading-bar .bar { 
 	background: #d43f3a; 
 	height: 4px; 
+}
+
+.box {
+	border: 1px solid #eee;
+	display: inline-block;
+	padding: 5px 10px;
+	width: 225px;
+	height: 100px;
+}
+.box img {
+	width: 100%;
+	height: auto;
 }

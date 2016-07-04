@@ -1,0 +1,29 @@
+<div ng-controller="ActivityController" ng-init="loadDefault()">
+	<h1>Activities</h1>
+	
+	<table datatable="" class="table table-hover table-striped table-bordered">
+	    <thead>
+		    <tr>
+		        <th>ID</th>
+		        <th>User</th>
+		        <th>Store</th>
+		        <th>Reference #</th>
+		        <th>Date &amp; Time</th>
+		        <th>&nbsp;</th>
+		    </tr>
+	    </thead>
+	    
+	    <tbody>
+		    <tr ng-repeat="a in activities">
+		        <td>{{a.Id}}</td>
+		        <td>{{a.User.FirstName}} {{a.User.LastName}}</td>
+		        <td>{{a.Store.Name}}</td>
+		        <td>{{a.ReferenceKey}}</td>
+		        <td>{{formatDateTime(a.ClickDateTime)}}</td>
+		        <td style="text-align: center;">
+		        	<a href="#"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span></a>
+		        </td>
+		    </tr>
+	    </tbody>
+	</table>
+</div>
