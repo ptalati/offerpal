@@ -16,7 +16,8 @@
       'jqdatepicker',
       'category-filter',
       'product-template',
-      'product-type-template'
+      'product-type-template',
+      'offer-button-template'
   	]);
 
     //app.constant('baseUrl', 'http://localhost:402/');
@@ -286,9 +287,7 @@
             };
             
             $scope.redirecToOfer = function(offer) {
-				var url = $state.href('redirectoffer', {offerId: offer.Id}, {absolute: true});
-				
-				window.open(url, '_blank');
+				return $state.href('redirectoffer', {offerId: offer.Id}, {absolute: true});
             };
 	    }
 	]);
