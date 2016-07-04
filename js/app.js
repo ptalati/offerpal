@@ -120,7 +120,7 @@
                 url: "/redirect/store/:storeId/:token",
                 templateUrl: 'templates/redirect.store.html',
                 controller: function ($scope, baseUrl, $state) {
-                	if (!localStorage["offerpal_token"]) {
+                	if (typeof $state.params.token === "undefined") {
                         $state.go('login');
                     }
                 }
@@ -128,7 +128,7 @@
                 url: "/redirect/offer/:offerId/:token",
                 templateUrl: 'templates/redirect.offer.html',
                 controller: function ($scope, baseUrl, $state) {
-                	if (!localStorage["offerpal_token"]) {
+                	if (typeof $state.params.token === "undefined") {
                         $state.go('login');
                     }
                 }
