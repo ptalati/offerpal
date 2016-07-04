@@ -247,6 +247,16 @@
 				window.device = { platform: 'Browser' };
 			}
 		}
+		
+		function openExternalBrowser(elem) {
+			var url = elem.getAttribute("data-url");
+			
+			console.log(url);
+			
+			window.open(url, '_system');
+			
+			return false;
+		}
 	</script>
 </body>
 </html>

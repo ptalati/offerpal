@@ -287,9 +287,7 @@
             };
             
             $scope.redirecToOfer = function(offer) {
-            	var url = "http://beta.offerpal.in/" + $state.href('redirectoffer', {offerId: offer.Id});
-            	
-            	window.open(url, '_blank', 'location=yes');
+            	return "http://beta.offerpal.in/" + $state.href('redirectoffer', {offerId: offer.Id});
             };
 	    }
 	]);
