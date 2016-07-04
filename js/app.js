@@ -350,7 +350,7 @@
             	if (typeof $state.params.offerId !== "undefined") redirectParam = "&offerId=" + $state.params.offerId;
         		if (typeof $state.params.storeId !== "undefined") redirectParam = "&storeId=" + $state.params.storeId;
             	
-            	$http.get(baseUrl + "api/account/redirect?token=" + $scope.token.Token + redirectParam).then(function (results) {
+            	$http.get(baseUrl + "api/account/redirect?token=" + $state.params.token + redirectParam).then(function (results) {
         		    window.location = results.data;
 		        });
             }
