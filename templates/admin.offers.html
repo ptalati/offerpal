@@ -1,34 +1,36 @@
 <div ng-controller="OfferController" ng-init="loadDefault()">
 	<h1>Offers <a class="btn btn-default" ui-sref="admin.offer({offerId: 0})">+</a></h1>
-
-	<table datatable="" class="table table-hover table-striped table-bordered">
-	    <thead>
-		    <tr>
-		        <th>ID</th>
-		        <th>Name</th>
-		        <th>Slug</th>
-		        <th>Category</th>
-		        <th>Store</th>
-		        <th>Type</th>
-		        <th style="width: 100px;">&nbsp;</th>
-		    </tr>
-	    </thead>
-	    
-	    <tbody>
-		    <tr ng-repeat="o in offers">
-		        <td>{{o.Id}}</td>
-		        <td>{{o.Name}}</td>
-		        <td>{{o.Slug}}</td>
-		        <td>{{o.Category.Name}}</td>
-		        <td>{{o.Store.Name}}</td>
-		        <td>{{o.Type.Name}}</td>
-		        <td style="text-align: center;">
-		        	<span class="glyphicon glyphicon-asterisk {{o.Featured ? '' : 'disabled'}}" aria-hidden="true"></span>&nbsp;
-		        	<span class="glyphicon glyphicon-eye-open {{o.Active ? '' : 'disabled'}}" aria-hidden="true"></span>&nbsp;
-		        	<span class="glyphicon glyphicon-edit" aria-hidden="true" ui-sref="admin.offer({offerId: o.Id})"></span>&nbsp;
-		        	<span class="glyphicon glyphicon-trash disabled" aria-hidden="true"></span>
-		        </td>
-		    </tr>
-	    </tbody>
-	</table>
+	
+	<div class="table-responsive">
+		<table datatable="" class="table table-hover table-striped table-bordered">
+		    <thead>
+			    <tr>
+			        <th>ID</th>
+			        <th>Name</th>
+			        <th>Slug</th>
+			        <th>Category</th>
+			        <th>Store</th>
+			        <th>Type</th>
+			        <th style="width: 100px;">&nbsp;</th>
+			    </tr>
+		    </thead>
+		    
+		    <tbody>
+			    <tr ng-repeat="o in offers">
+			        <td>{{o.Id}}</td>
+			        <td>{{o.Name}}</td>
+			        <td>{{o.Slug}}</td>
+			        <td>{{o.Category.Name}}</td>
+			        <td>{{o.Store.Name}}</td>
+			        <td>{{o.Type.Name}}</td>
+			        <td style="text-align: center;">
+			        	<span class="glyphicon glyphicon-asterisk {{o.Featured ? '' : 'disabled'}}" aria-hidden="true"></span>&nbsp;
+			        	<span class="glyphicon glyphicon-eye-open {{o.Active ? '' : 'disabled'}}" aria-hidden="true"></span>&nbsp;
+			        	<span class="glyphicon glyphicon-edit" aria-hidden="true" ui-sref="admin.offer({offerId: o.Id})"></span>&nbsp;
+			        	<span class="glyphicon glyphicon-trash disabled" aria-hidden="true"></span>
+			        </td>
+			    </tr>
+		    </tbody>
+		</table>
+	</div>
 </div>

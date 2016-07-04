@@ -33,7 +33,11 @@
 	.products {
 	}
     .products .product { 
-    	width: 45%;
+    	width: 44.5%;
+    	min-width: 0;
+    }
+    .products .product h3 {
+    	margin-top: -70px;
     }
 
     footer { 
@@ -142,5 +146,32 @@
 		margin: 0 0 0 0;
 		padding: 0 0 0 0;
 		border-top: 2px solid #999;
+	}
+	
+	.row.top-nav {
+		display: none;
+	}
+	
+	.stores ul li {
+		width: 46%;
+	}
+	.stores ul li a,
+	.featured-stores ul li a {
+		text-align: center;
+	}
+	.stores ul li a img,
+	.featured-stores ul li a img {
+		width: 80%;
+		height: auto;
+		margin: 10px auto;
+	}
+	
+	.list-group {
+		margin: 0 -5px 15px;
+	}
+	.list-group a.list-group-item {
+		float: left;
+		margin: 5px;
+		border-radius: 5px;
 	}
 }

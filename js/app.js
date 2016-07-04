@@ -145,6 +145,9 @@
             }).state("account.activities", {
                 url: "/activities",
                 templateUrl: 'templates/activities.html'
+            }).state("verify", {
+                url: "/user/verify/:emailToken",
+                templateUrl: 'templates/verify.html'
             });
 
             $urlRouterProvider.otherwise(function ($injector, $location) {

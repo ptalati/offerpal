@@ -1,29 +1,31 @@
 <div ng-controller="CategoryController" ng-init="loadDefault()">
 	<h1>Categories <a class="btn btn-default" ui-sref="admin.category({categoryId: 0})">+</a></h1>
 
-	<table datatable="" class="table table-hover table-striped table-bordered">
-	    <thead>
-		    <tr>
-		        <th>ID</th>
-		        <th>Name</th>
-		        <th>Slug</th>
-		        <th>Parent</th>
-		        <th style="width: 100px;">&nbsp;</th>
-		    </tr>
-	    </thead>
-	    
-	    <tbody>
-		    <tr ng-repeat="c in categories">
-		        <td>{{c.Id}}</td>
-		        <td>{{c.Name}}</td>
-		        <td>{{c.Slug}}</td>
-		        <td><span ng-show="c.Parent.Id !== 0">{{c.Parent.Name}}</span><span ng-show="c.Parent.Id === 0">- root -</span></td>
-		        <td style="text-align: center;">
-		        	<span class="glyphicon glyphicon-eye-open {{c.Active ? '' : 'disabled'}}" aria-hidden="true"></span>&nbsp;
-		        	<span class="glyphicon glyphicon-edit" aria-hidden="true" ui-sref="admin.category({categoryId: c.Id})"></span>&nbsp;
-		        	<span class="glyphicon glyphicon-trash disabled" aria-hidden="true"></span>
-		        </td>
-		    </tr>
-	    </tbody>
-	</table>
+	<div class="table-responsive">
+		<table datatable="" class="table table-hover table-striped table-bordered">
+		    <thead>
+			    <tr>
+			        <th>ID</th>
+			        <th>Name</th>
+			        <th>Slug</th>
+			        <th>Parent</th>
+			        <th style="width: 100px;">&nbsp;</th>
+			    </tr>
+		    </thead>
+		    
+		    <tbody>
+			    <tr ng-repeat="c in categories">
+			        <td>{{c.Id}}</td>
+			        <td>{{c.Name}}</td>
+			        <td>{{c.Slug}}</td>
+			        <td><span ng-show="c.Parent.Id !== 0">{{c.Parent.Name}}</span><span ng-show="c.Parent.Id === 0">- root -</span></td>
+			        <td style="text-align: center;">
+			        	<span class="glyphicon glyphicon-eye-open {{c.Active ? '' : 'disabled'}}" aria-hidden="true"></span>&nbsp;
+			        	<span class="glyphicon glyphicon-edit" aria-hidden="true" ui-sref="admin.category({categoryId: c.Id})"></span>&nbsp;
+			        	<span class="glyphicon glyphicon-trash disabled" aria-hidden="true"></span>
+			        </td>
+			    </tr>
+		    </tbody>
+		</table>
+	</div>
 </div>

@@ -15,6 +15,7 @@
                 Status: false,
                 Message: ''
             };
+            $scope.verificationComplete = false;
 
             $scope.fetchUserTypes = function() {
                 $http.get(baseUrl + "api/common/usertypes").then(function (results) {
@@ -33,6 +34,12 @@
         		    $scope.user = results.data;
 		        });
             };
+            
+            $scope.verifyUser = function(emailToken) {
+            	$http.get(baseUrl + "api/account/verify?emailToken=" + emailToken).then(function (results) {
+        		    $scope.verificationComplete = results.data;
+		        });
+            }
             
             $scope.saveUser = function(user) {
         		$http.post(baseUrl + "api/user?token=" + $scope.token.Token, JSON.stringify(user)).then(function (results) {
@@ -59,8 +66,24 @@
                 }
             };
             
+            $scope.loadFrontDefault = function() {
+            	console.log("Email token sent");
+            	if ($state.params.emailToken) {
+            		$scope.verifyUser($state.params.emailToken);
+                }
+            };
+            
             $scope.resendEmail = function(user) {
             	$http.post(baseUrl + "api/account/resend?token=" + $scope.token.Token, JSON.stringify(user)).then(function (results) {
+            		$scope.success = {
+                        Status: true,
+                        Message: 'Record has been saved.'
+                    };
+		        });
+            };
+            
+            $scope.resetPassword = function(user) {
+            	$http.post(baseUrl + "api/account/reset?token=" + $scope.token.Token, JSON.stringify(user)).then(function (results) {
             		$scope.success = {
                         Status: true,
                         Message: 'Record has been saved.'
