@@ -245,16 +245,7 @@
 		function onDeviceReady() {
 			if (!window.device) {
 				window.device = { platform: 'Browser' };
-			} 
-
-			jQuery('a[data-redirect="true"]').on('click', function (e) {
-				var url = jQuery(this).data('url');
-				
-				console.log("Android");
-				console.log(url);
-				
-			 	window.open(url, '_blank', 'location=yes');
-			});
+			}
 		}
 	</script>
 </body>
