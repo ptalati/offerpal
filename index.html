@@ -242,11 +242,9 @@
 		document.addEventListener('deviceready', onDeviceReady, false);
 
 		function onDeviceReady() {
-
-			// Mock device.platform property if not available
 			if (!window.device) {
 				window.device = { platform: 'Browser' };
-			}
+			} 
 
 			handleExternalURLs();
 		}

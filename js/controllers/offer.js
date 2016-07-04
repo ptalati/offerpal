@@ -2,8 +2,8 @@
     var app = angular.module('offer-controller', ['angular-loading-bar']);
 
     app.controller('OfferController', [
-        '$window', '$scope', '$http', '$log', '$scope', 'baseUrl', '$state', 'Upload', '$timeout', 
-        function ($window, $scope, $http, $log, $scope, baseUrl, $state, Upload, $timeout) {
+        '$window', '$scope', '$http', '$log', '$scope', 'baseUrl', '$state', 'Upload', '$timeout', '$window',
+        function ($window, $scope, $http, $log, $scope, baseUrl, $state, Upload, $timeout, $window) {
             $scope.offers = [];
             $scope.offer = {};
             $scope.categories = [];

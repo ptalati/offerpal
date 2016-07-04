@@ -230,6 +230,8 @@
             };
 
             $rootScope.imageLoad = function (file) {
+            	if (typeof file === "undefined") return;
+            	
                 return baseUrl + "Uploads/" + file;
             };
             
@@ -281,6 +283,12 @@
             
             $scope.toggleActionMenu = function() {
             	$scope.actionMenu = !$scope.actionMenu;
+            };
+            
+            $scope.redirecToOfer = function(offer) {
+				var url = $state.href('redirectoffer', {offerId: offer.Id}, {absolute: true});
+				
+				window.open(url, '_blank');
             };
 	    }
 	]);
