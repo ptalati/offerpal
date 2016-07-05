@@ -31,13 +31,15 @@
     }
 	
 	.products {
+		display: block;
+		width: 100%;
 	}
     .products .product { 
-    	width: 44.5%;
+    	width: 100%;
     	min-width: 0;
     }
     .products .product h3 {
-    	margin-top: -70px;
+    	margin-top: -50px;
     }
 
     footer { 

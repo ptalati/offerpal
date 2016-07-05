@@ -1,0 +1,34 @@
+<div ng-controller="UserController" ng-init="loadFrontDefault()">
+	<h1>Reset Password</h1>
+	
+	<div class="alert alert-danger" role="alert" ng-show="error.Status">{{error.Message}}</div>
+	<div class="alert alert-success" role="alert" ng-show="success.Status"><p ng-bind-html="renderHtml(success.Message)"></p></div>
+	  
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div class="forgotpassword">
+			    <form name="resetForm" class="form-container" ng-submit="resetForm.$valid && changePassword(reset)" ng-hide="success.Status">
+			        <div class="form-group">
+			            <label for="password">Password<span class="red">*</span>:</label>
+			            <input type="password" class="form-control" id="password" ng-model="reset.Password" ng-required="true" />
+			        </div>
+			
+			        <div class="form-group">
+			            <label for="confirm_password">Confirm Password<span class="red">*</span>:</label>
+			            <input type="password" class="form-control" id="confirm_password" ng-model="reset.ConfirmPassword" ng-required="true" />
+			        </div>
+			
+			        <input type="submit" class="btn btn-primary" value="Request Password" />
+			    </form>
+			</div>
+			
+			<p>&nbsp;</p>
+		</div>
+		
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<p>&nbsp;</p>
+		</div>
+	</div>
+	
+	<p>&nbsp;</p>
+</div>

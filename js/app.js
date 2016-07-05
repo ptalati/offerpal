@@ -26,7 +26,7 @@
     app.constant('baseUrl', 'http://api.offerpal.in/');
     app.constant('isMobile', navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i));
     //app.constant('webUrl', 'http://localhost:403/');
-	app.constant('webUrl', 'http://beta.offerpal.in/');
+    app.constant('webUrl', 'http://beta.offerpal.in/');
     
     app.config([
         'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
@@ -148,6 +148,12 @@
             }).state("verify", {
                 url: "/user/verify/:emailToken",
                 templateUrl: 'templates/verify.html'
+            }).state("reset", {
+                url: "/user/reset/:emailToken",
+                templateUrl: 'templates/reset.html'
+            }).state("forgotpassword", {
+                url: "/user/forgotpassword",
+                templateUrl: 'templates/forgot-password.html'
             });
 
             $urlRouterProvider.otherwise(function ($injector, $location) {

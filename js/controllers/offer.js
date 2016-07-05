@@ -71,30 +71,34 @@
 		        });
             };
             
-            $scope.saveOffer = function(offer) {
-        		var image = $scope.Image;
+            $scope.saveOffer = function(offer, uploadCompleted) {
+            	uploadCompleted = uploadCompleted || false;
             	
-        		if (typeof image !== "string") {
-        			if (image !== null) offer.Image = image.name;
-                	
-        			$scope.upload(image);
+        		if (uploadCompleted === false) {
+        			var image = $scope.Image;
+        			
+	        		if (typeof image !== "string") {
+	        			$scope.upload(image, offer);
+	        		}
+        		} else {
+        			if ($scope.fileName !== null) offer.Image = $scope.fileName;
+        			
+	        		$http.post(baseUrl + "api/offer?token=" + $scope.token.Token, JSON.stringify(offer)).then(function (results) {
+	            		$scope.offer = results.data;
+	        		    
+	        		    if ($scope.offer.Image !== '') {
+	        		    	$scope.Image = $scope.imageLoad($scope.offer.Image);
+	        		    	$scope.imageUpload = false;
+	        		    }
+	        		    
+	        		    $state.go('admin.offer', {categoryId: $scope.offer.Id});
+	
+	                    $scope.success = {
+	                        Status: true,
+	                        Message: 'Record has been saved.'
+	                    };
+			        });
         		}
-        		
-        		$http.post(baseUrl + "api/offer?token=" + $scope.token.Token, JSON.stringify(offer)).then(function (results) {
-            		$scope.offer = results.data;
-        		    
-        		    if ($scope.offer.Image !== '') {
-        		    	$scope.Image = $scope.imageLoad($scope.offer.Image);
-        		    	$scope.imageUpload = false;
-        		    }
-        		    
-        		    $state.go('admin.offer', {categoryId: $scope.offer.Id});
-
-                    $scope.success = {
-                        Status: true,
-                        Message: 'Record has been saved.'
-                    };
-		        });
             };
 
             $scope.loadDefault = function() {
@@ -137,7 +141,7 @@
             	$scope.offer.EndDateTime = $scope.offer.EndDateTime.replace("T00:00:00", "");
             }, true);
             
-            $scope.upload = function(file) {
+            $scope.upload = function(file, obj) {
             	var resumable = false;
             	
             	file.upload = Upload.upload({
@@ -152,6 +156,8 @@
 
         	    file.upload.then(function (response) {
         	    	$timeout(function () {
+        	    		$scope.fileName = response.data;
+        	    		$scope.saveOffer(obj, true);
         	    		file.result = response.data;
         	    	});
         	    }, function (response) {

@@ -74,7 +74,7 @@
             </div>
             
             <div class="row top-action">
-                <div class="col-md-3"><h1 id="logo"><a ui-sref="welcome"><img src="http://beta.offerpal.in/images/logo.png" alt="offerpal" /></a></h1></div>
+                <div class="col-md-3"><h1 id="logo"><a ui-sref="welcome"><img src="/images/logo.png" alt="offerpal" /></a></h1></div>
 				
 				<div class="col-md-9 search-box">
 					<form class="form-inline">
@@ -124,7 +124,7 @@
                 	<div  class="collapse navbar-collapse navigation">
 		                <ul id="menu" class="nav navbar-nav">
 		                	<li ui-sref-active-eq="active"><a ui-sref="welcome">Home</a></li>
-		                	<li ui-sref-active-eq="active" ng-repeat="c in categories | categoryFilter:0" class="column-{{showDropDown(c.Id)}}">
+		                	<li ui-sref-active-eq="active" ng-repeat="c in categories | categoryFilter:0" class="{{c.Class}}">
 		                		<a ui-sref="category({categorySlug: c.Slug})">{{c.Name}}</a>
 		                		
 		                		<ul class="dropdown-menu" ng-show="showDropDown(c.Id) !== 0">
@@ -209,7 +209,7 @@
             <ul id="actionMenu" ng-show="token !== null">
             	<li ng-show="token.User.Type.Id === 1"><a ui-sref="admin">Dashboard</a></li>
                 <li><a ui-sref="account">Account</a></li>
-				<li><a ui-sref="account.activities">Activity</a></li>
+		    	<li><a ui-sref="account.activities">Activity</a></li>
 		    	<li><a href="#">My Wallet</a></li>
 		    	<li><a href="#">Reedem</a></li>
 		    	<li><a ui-sref="logout">Logout</a></li>
@@ -222,7 +222,7 @@
         	<h3>Menu</h3>
         	
             <ul id="menu">
-	          	<li ui-sref-active-eq="active"><a ui-sref="stores">Popular Stores</a></li>
+            	<li ui-sref-active-eq="active"><a ui-sref="stores">Popular Stores</a></li>
                 <li ui-sref-active-eq="active"><a href="#">Popular Products</a></li>
 	          	<li ui-sref-active-eq="active"><a ui-sref="welcome">Home</a></li>
 	          	<li ui-sref-active-eq="active" ng-repeat="c in categories | categoryFilter:0" class="column-{{showDropDown(c.Id)}}">

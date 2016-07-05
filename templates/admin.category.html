@@ -18,6 +18,11 @@
 		</div>
 		
 		<div class="form-group">
+			<label for="Class">Class</label>
+			<input type="text" class="form-control" id="Class" placeholder="Class" ng-model="category.Class" />
+		</div>
+		
+		<div class="form-group">
 			<label for="Parent">Parent</label>
 			<select class="form-control" id="Parent" ng-model="category.Parent" ng-options="c.Name for c in categories track by c.Name">
 				<option></option>

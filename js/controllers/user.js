@@ -2,8 +2,8 @@
     var app = angular.module('user-controller', ['angular-loading-bar']);
 
     app.controller('UserController', [
-        '$window', '$scope', '$http', '$log', '$scope', 'baseUrl', '$state',  
-        function ($window, $scope, $http, $log, $scope, baseUrl, $state) {
+        '$window', '$scope', '$http', '$log', '$scope', 'baseUrl', '$state', '$location',
+        function ($window, $scope, $http, $log, $scope, baseUrl, $state, $location) {
             $scope.users = [];
             $scope.user = {};
             $scope.userTypes = [];
@@ -69,7 +69,9 @@
             $scope.loadFrontDefault = function() {
             	console.log("Email token sent");
             	if ($state.params.emailToken) {
-            		$scope.verifyUser($state.params.emailToken);
+            		if ($location.path().indexOf("verify") !== -1) {
+            			$scope.verifyUser($state.params.emailToken);
+            		}
                 }
             };
             
@@ -82,11 +84,24 @@
 		        });
             };
             
-            $scope.resetPassword = function(user) {
-            	$http.post(baseUrl + "api/account/reset?token=" + $scope.token.Token, JSON.stringify(user)).then(function (results) {
+            $scope.resetPassword = function(email) {
+            	$http.post(baseUrl + "api/account/reset?email=" + email).then(function (results) {
             		$scope.success = {
                         Status: true,
-                        Message: 'Record has been saved.'
+                        Message: 'Reset password email has been sent.'
+                    };
+		        });
+            };
+            
+            $scope.forgotPassword = function(forgotpassword) {
+            	$scope.resetPassword(forgotpassword.Email);
+            };
+            
+            $scope.changePassword = function(reset) {
+            	$http.post(baseUrl + "api/account/changepassword?emailToken=" + $state.params.emailToken + "&password=" + reset.Password).then(function (results) {
+            		$scope.success = {
+                        Status: true,
+                        Message: 'Your password has been updated, please try login again.'
                     };
 		        });
             };
