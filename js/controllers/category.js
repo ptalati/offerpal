@@ -72,6 +72,12 @@
             $scope.loadFrontDefault = function() {
             	$scope.fetchCategoryBySlug($state.params.categorySlug);
             };
+            
+            $scope.$watch('category.Name', function (newVal, oldVal) {
+            	if (typeof $scope.category.Name === "undefined") return;
+            	
+            	$scope.category.Slug = $scope.generateSlug($scope.category.Name);
+            }, true);
         }
     ]);
 })();

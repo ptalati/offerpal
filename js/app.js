@@ -368,6 +368,15 @@
             	$http.get(baseUrl + "api/account/redirect?token=" + $state.params.token + redirectParam).then(function (results) {
         		    window.location = results.data;
 		        });
+            };
+            
+            $scope.generateSlug = function(str) {
+            	var $slug = '';
+                var trimmed = $.trim(str);
+                
+                $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+                
+                return $slug.toLowerCase();
             }
 	    }
 	]);

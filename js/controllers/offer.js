@@ -74,6 +74,12 @@
             $scope.saveOffer = function(offer, uploadCompleted) {
             	uploadCompleted = uploadCompleted || false;
             	
+            	if (typeof $scope.Image === "string") {
+            		uploadCompleted = true;
+            		
+            		$scope.fileName = $scope.offer.Image;
+            	}
+            	
         		if (uploadCompleted === false) {
         			var image = $scope.Image;
         			
@@ -81,7 +87,7 @@
 	        			$scope.upload(image, offer);
 	        		}
         		} else {
-        			if ($scope.fileName !== null) offer.Image = $scope.fileName;
+    				if ($scope.fileName !== null) offer.Image = $scope.fileName;
         			
 	        		$http.post(baseUrl + "api/offer?token=" + $scope.token.Token, JSON.stringify(offer)).then(function (results) {
 	            		$scope.offer = results.data;
@@ -181,6 +187,12 @@
             	$scope.imageUpload = true;
             	$scope.Image = '';
             };
+            
+            $scope.$watch('offer.Name', function (newVal, oldVal) {
+            	if (typeof $scope.offer.Name === "undefined") return;
+            	
+            	$scope.offer.Slug = $scope.generateSlug($scope.offer.Name);
+            }, true);
         }
     ]);
 })();

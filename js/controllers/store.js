@@ -59,30 +59,40 @@
 		        });
             };
             
-            $scope.saveStore = function(store) {
-            	var image = $scope.Image;
+            $scope.saveStore = function(store, uploadCompleted) {
+        		uploadCompleted = uploadCompleted || false;
             	
-        		if (typeof image !== "string") {
-        			if (image !== null) store.Logo = image.name;
-                	
-        			$scope.upload(image);
-        		}
-        		
-            	$http.post(baseUrl + "api/store?token=" + $scope.token.Token, JSON.stringify(store)).then(function (results) {
-        		    $scope.store = results.data;
-        		    
-        		    if ($scope.store.Logo !== '') {
-        		    	$scope.Image = $scope.imageLoad($scope.store.Logo);
-        		    	$scope.imageUpload = false;
-        		    }
-        		    
-        		    $state.go('admin.store', {storeId: $scope.store.Id});
+            	if (typeof $scope.Image === "string") {
+            		uploadCompleted = true;
+            		
+            		$scope.fileName = $scope.store.Logo;
+            	}
+            	
+        		if (uploadCompleted === false) {
+        			var image = $scope.Image;
+        			
+	        		if (typeof image !== "string") {
+	        			$scope.upload(image, store);
+	        		}
+        		} else {
+        			if ($scope.fileName !== null) store.Logo = $scope.fileName;
+        			
+        			$http.post(baseUrl + "api/store?token=" + $scope.token.Token, JSON.stringify(store)).then(function (results) {
+            		    $scope.store = results.data;
+            		    
+            		    if ($scope.store.Logo !== '') {
+            		    	$scope.Image = $scope.imageLoad($scope.store.Logo);
+            		    	$scope.imageUpload = false;
+            		    }
+            		    
+            		    $state.go('admin.store', {storeId: $scope.store.Id});
 
-                    $scope.success = {
-                        Status: true,
-                        Message: 'Record has been saved.'
-                    };
-		        });
+                        $scope.success = {
+                            Status: true,
+                            Message: 'Record has been saved.'
+                        };
+    		        });
+        		}
             };
 
             $scope.loadDefault = function () {
@@ -111,7 +121,7 @@
                 }
             };
             
-            $scope.upload = function(file) {
+            $scope.upload = function(file, obj) {
             	var resumable = false;
             	
             	file.upload = Upload.upload({
@@ -126,6 +136,8 @@
 
         	    file.upload.then(function (response) {
         	    	$timeout(function () {
+        	    		$scope.fileName = response.data;
+        	    		$scope.saveStore(obj, true);
         	    		file.result = response.data;
         	    	});
         	    }, function (response) {
@@ -149,6 +161,12 @@
             	$scope.imageUpload = true;
             	$scope.Image = '';
             };
+            
+            $scope.$watch('store.Name', function (newVal, oldVal) {
+            	if (typeof $scope.store.Name === "undefined") return;
+            	
+            	$scope.store.Slug = $scope.generateSlug($scope.store.Name);
+            }, true);
         }
     ]);
 })();
