@@ -11,7 +11,7 @@
     <description>Offerpal - Your Cashback Buddy</description>
 
     <author href="http://www.brainfeedsolutions.com" email="support@brainfeedsolutions.com">
-        BrainFeed Solutions Team
+        BrainFeed Solutions
     </author>
 
     <feature name="Vibration">
@@ -113,7 +113,7 @@
     <gap:splash src="res/screen/windows-phone/screen-portrait.jpg"      gap:platform="winphone" />
 
     <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>100</string>
+		<string>100</string>
     </gap:config-file>
 
     <!--
@@ -144,5 +144,5 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-
+	<platform name="windows" />
 </widget>
