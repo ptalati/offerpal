@@ -264,6 +264,12 @@
             	
                 return baseUrl + "Uploads/" + file;
             };
+
+            $rootScope.logoLoad = function (file) {
+            	if (typeof file === "undefined") return;
+            	
+                return webUrl + "images/" + file;
+            };
             
             $scope.$on('$locationChangeStart', function (event) {
                 console.log('Route changed');
