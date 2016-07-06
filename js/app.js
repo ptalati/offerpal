@@ -124,6 +124,9 @@
             }).state("admin.transactions", {
                 url: "/transactions",
                 templateUrl: 'templates/admin.transactions.html',
+            }).state("admin.invite", {
+                url: "/invite",
+                templateUrl: 'templates/admin.invite.html',
             }).state("category", {
                 url: "/category/:categorySlug",
                 templateUrl: 'templates/category.html'
@@ -172,10 +175,10 @@
                 url: "/redeem",
                 templateUrl: 'templates/redeem.html'
             }).state("verify", {
-                url: "/user/verify/:emailToken",
+                url: "/user/verify/?emailToken",
                 templateUrl: 'templates/verify.html'
             }).state("reset", {
-                url: "/user/reset/:emailToken",
+                url: "/user/reset/?emailToken",
                 templateUrl: 'templates/reset.html'
             }).state("forgotpassword", {
                 url: "/user/forgotpassword",
@@ -186,6 +189,12 @@
             }).state("offers", {
                 url: "/offers",
                 templateUrl: 'templates/offers.html'
+            }).state("termsconditions", {
+                url: "/terms-conditions",
+                templateUrl: 'templates/terms-conditions.html'
+            }).state("contact", {
+                url: "/contact",
+                templateUrl: 'templates/contact.html'
             });
 
             $urlRouterProvider.otherwise(function ($injector, $location) {

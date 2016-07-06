@@ -203,6 +203,7 @@ header h1#logo > span {
 .container {
     background: #fff;
     padding: 15px;
+    min-height: 530px;
 }
 
 .container h1:first-child {

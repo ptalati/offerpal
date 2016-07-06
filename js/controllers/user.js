@@ -70,6 +70,8 @@
             	console.log("Email token sent");
             	if ($state.params.emailToken) {
             		if ($location.path().indexOf("verify") !== -1) {
+            			$scope.page.setTitle('Verify Email Address');
+            			
             			$scope.verifyUser($state.params.emailToken);
             		}
                 }

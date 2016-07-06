@@ -2,7 +2,7 @@
 
 <a ui-sref="offer({offerSlug: offer.Slug})" title="{{offer.Name}}" class="image"><img ng-src="{{imageLoad(offer.Image)}}" alt="{{offer.Name}}" /></a>
 
-<h3><a ui-sref="offer({offerSlug: offer.Slug})" title="{{offer.Name}}">{{offer.Name | limitTo:29}}...</a></h3>
+<h3><a ui-sref="offer({offerSlug: offer.Slug})" title="{{offer.Name}}">{{offer.Name | limitTo:25}}...</a></h3>
 
 <div class="caption">
 	<p><i>From <a ui-sref="store({storeSlug: offer.Store.Slug})">{{offer.Store.Name}}</a></i></p>

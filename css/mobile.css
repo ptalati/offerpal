@@ -32,18 +32,29 @@
 	
 	.products {
 		display: block;
-		width: 108%;
+		width: 100%;
+		margin: 0;
 	}
     .products .product { 
-    	width: 44%;
+    	width: 48.7%;
     	min-width: 0;
+    	margin: 10px 10px 10px 0;
+    }
+    .products .product:nth-child(2n+0) {
+    	margin-right: 0;
     }
     .products .product h3 {
     	margin-top: -50px;
     }
 
-    footer { 
+    footer > .wrapper { 
     	display: none; 
+    }
+    footer > .copyright {
+    	text-align: center;
+    }
+    footer > .copyright .text-right {
+    	text-align: center;
     }
     
     .login {
