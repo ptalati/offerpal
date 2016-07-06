@@ -103,7 +103,7 @@
 	        		    	$scope.imageUpload = false;
 	        		    }
 	        		    
-	        		    $state.go('admin.offer', {categoryId: $scope.offer.Id});
+	        		    $state.go('admin.offer', {offerId: $scope.offer.Id});
 	
 	                    $scope.success = {
 	                        Status: true,
