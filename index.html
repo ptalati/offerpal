@@ -42,6 +42,7 @@
 	<script type="text/javascript" src="http://beta.offerpal.in/js/controllers/offer.js"></script>
 	<script type="text/javascript" src="http://beta.offerpal.in/js/controllers/user.js"></script>
 	<script type="text/javascript" src="http://beta.offerpal.in/js/controllers/activity.js"></script>
+	<script type="text/javascript" src="/js/controllers/transaction.js"></script>
 	<script type="text/javascript" src="http://beta.offerpal.in/js/directives/datepicker.js"></script>
 	<script type="text/javascript" src="http://beta.offerpal.in/js/directives/product.js"></script>
 	<script type="text/javascript" src="http://beta.offerpal.in/js/directives/product-type.js"></script>
@@ -61,7 +62,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
                 	<span ng-show="token.User.Type.Id === 1"><a ui-sref="admin">Dashboard</a>&nbsp;&nbsp;<strong>&middot;</strong>&nbsp;&nbsp;</span>
                     <a ui-sref="stores">Popular Stores</a>&nbsp;&nbsp;<strong>&middot;</strong>&nbsp;&nbsp;
-                    <a href="#">Popular Products</a>
+                    <a ui-sref="offers">Popular Products</a>
 				</div>
             </div>
 
@@ -92,8 +93,8 @@
 					    </div>
 					    
 					    <div class="btn-group" role="group" aria-label="First group" ng-show="token !== null">
-						    <a class="btn btn-success" title="Available Balance"><strong>&#8377; 4000.00</strong></a>
-						    <a class="btn btn-danger" title="Pending Balance"><strong>&#8377; 4000.00</strong></a>
+						    <a class="btn btn-success" title="Available Balance"><strong>{{balance.AvailablePoints | currency:"&#8377;":2}}</strong></a>
+						    <a class="btn btn-danger" title="Pending Balance"><strong>{{balance.PendingPoints | currency:"&#8377;":2}}</strong></a>
 					    </div>
 					    
 					    <div class="btn-group" ng-show="token !== null">
@@ -107,8 +108,8 @@
 								<li><a ui-sref="account">Account</a></li>
 						    	<li><a ui-sref="account.activities">Activity</a></li>
 						    	<li role="separator" class="divider"></li>
-						    	<li><a href="#">My Wallet</a></li>
-						    	<li><a href="#">Reedem</a></li>
+						    	<li><a ui-sref="account.wallet">My Wallet</a></li>
+						    	<li><a ui-sref="account.redeem">Reedem</a></li>
 						    	<li role="separator" class="divider"></li>
 						    	<li><a ui-sref="logout">Logout</a></li>
 							</ul>
@@ -124,7 +125,7 @@
                 	<div  class="collapse navbar-collapse navigation">
 		                <ul id="menu" class="nav navbar-nav">
 		                	<li ui-sref-active-eq="active"><a ui-sref="welcome">Home</a></li>
-		                	<li ui-sref-active-eq="active" ng-repeat="c in categories | categoryFilter:0" class="{{c.Class}}">
+		                	<li ui-sref-active-eq="active" ng-repeat="c in categories | categoryFilter:0" class="{{showDropDown(c.Id) > 0 ? 'columns' : ''}} {{c.Class}}">
 		                		<a ui-sref="category({categorySlug: c.Slug})">{{c.Name}}</a>
 		                		
 		                		<ul class="dropdown-menu" ng-show="showDropDown(c.Id) !== 0">
@@ -223,7 +224,7 @@
         	
             <ul id="menu">
             	<li ui-sref-active-eq="active"><a ui-sref="stores">Popular Stores</a></li>
-                <li ui-sref-active-eq="active"><a href="#">Popular Products</a></li>
+                <li ui-sref-active-eq="active"><a ui-sref="offers">Popular Products</a></li>
 	          	<li ui-sref-active-eq="active"><a ui-sref="welcome">Home</a></li>
 	          	<li ui-sref-active-eq="active" ng-repeat="c in categories | categoryFilter:0" class="column-{{showDropDown(c.Id)}}">
           			<a ui-sref="category({categorySlug: c.Slug})">{{c.Name}}</a>

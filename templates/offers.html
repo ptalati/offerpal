@@ -1,0 +1,11 @@
+<div ng-controller="OfferController" ng-init="loadFrontDefault()">
+	<div class="breadcrumb"><a ui-sref="welcome">Home</a> > Offers</div>
+	
+	<h1>Offers</h1>
+	
+	<div class="offers products">
+		<div class="thumbnail product" ng-repeat="offer in offers">
+			<product></product>
+		</div>
+	</div>
+</div>

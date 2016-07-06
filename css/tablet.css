@@ -25,4 +25,8 @@
     .action li:nth-child(2) { 
     	border-left: none; 
     }
+    
+    .offer_price {
+    	font-size: 130%;
+    }
 }

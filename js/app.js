@@ -4,6 +4,7 @@
       'ngResource',
       'ui.router', 
       'ngSanitize',
+      'ngDialog',
       'angular-loading-bar',
       'pageslide-directive',
       'ngFileUpload',
@@ -14,6 +15,7 @@
       'offer-controller',
       'user-controller',
       'activity-controller',
+      'transaction-controller',
       'jqdatepicker',
       'category-filter',
       'product-template',
@@ -34,6 +36,20 @@
             //cfpLoadingBarProvider.spinnerTemplate = '<div id="loading-bar-spinner"><div class="spinner"><img src="/images/logo.png" /> Loading...</div></div>';
         }
     ]);
+
+    app.config(['ngDialogProvider', function (ngDialogProvider) {
+        ngDialogProvider.setDefaults({
+            className: 'ngdialog-theme-default',
+            plain: false,
+            showClose: true,
+            closeByDocument: true,
+            closeByEscape: true,
+            appendTo: false,
+            preCloseCallback: function () {
+                console.log('default pre-close callback');
+            }
+        });
+    }]);
 
     app.config([
         '$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -104,6 +120,9 @@
             }).state("admin.activities", {
                 url: "/activities",
                 templateUrl: 'templates/admin.activities.html',
+            }).state("admin.transactions", {
+                url: "/transactions",
+                templateUrl: 'templates/admin.transactions.html',
             }).state("category", {
                 url: "/category/:categorySlug",
                 templateUrl: 'templates/category.html'
@@ -145,6 +164,12 @@
             }).state("account.activities", {
                 url: "/activities",
                 templateUrl: 'templates/activities.html'
+            }).state("account.wallet", {
+                url: "/wallet",
+                templateUrl: 'templates/wallet.html'
+            }).state("account.redeem", {
+                url: "/redeem",
+                templateUrl: 'templates/redeem.html'
             }).state("verify", {
                 url: "/user/verify/:emailToken",
                 templateUrl: 'templates/verify.html'
@@ -154,6 +179,12 @@
             }).state("forgotpassword", {
                 url: "/user/forgotpassword",
                 templateUrl: 'templates/forgot-password.html'
+            }).state("offersfeatured", {
+                url: "/offers/featured",
+                templateUrl: 'templates/offers-featured.html'
+            }).state("offers", {
+                url: "/offers",
+                templateUrl: 'templates/offers.html'
             });
 
             $urlRouterProvider.otherwise(function ($injector, $location) {
@@ -194,6 +225,7 @@
         	$scope.menu = false;
         	$scope.actionMenu = false;
         	$scope.counter = 5;
+        	$scope.balance = {};
         	
 	        $scope.fetchCategories = function() {
 	        	$http.get(baseUrl + "api/category").then(function (results) {
@@ -227,12 +259,21 @@
                 }
             };
 	        
+	        $scope.fetchBalance = function () {
+                if ($scope.token !== null) {
+                	$http.get(baseUrl + "api/account/balance?token=" + $scope.token.Token).then(function (results) {
+            		    $scope.balance = results.data;
+    		        });
+                }
+            };
+	        
 	        $scope.loadData = function() {
 	        	$scope.fetchCategories();
 	        	$scope.fetchStores();
 	        	$scope.fetchOffers();
 	        	$scope.fetchFeaturedOffers();
 	        	$scope.fetchUser();
+	        	$scope.fetchBalance();
 	        };
 	        
 	        $rootScope.$watch('token', function(newVal, oldVal) {

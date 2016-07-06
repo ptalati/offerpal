@@ -42,6 +42,12 @@
         		    $scope.offers = results.data;
 		        });
             };
+        	
+	        $scope.fetchFeaturedOffers = function() {
+	        	$http.get(baseUrl + "api/offer/featured").then(function (results) {
+        		    $scope.offers = results.data;
+		        });
+	        };
 
             $scope.fetchOffer = function(offerId) {
                 $http.get(baseUrl + "api/offer?id=" + offerId).then(function (results) {
@@ -126,13 +132,17 @@
             $scope.loadFrontDefault = function() {
             	if ($state.params.offerSlug) {
             		$scope.fetchOfferBySlug($state.params.offerSlug);
-                }
-            	
-            	if ($state.params.offerId) {
+                } else if ($state.params.offerId) {
                 	if ($state.params.offerId > 0) {
                 		$scope.fetchOffer($state.params.offerId);
                 	}
-                }
+                } else {
+            		$scope.fetchOffers();
+            	}
+            };
+            
+            $scope.loadFeaturedDefault = function() {
+        		$scope.fetchFeaturedOffers();
             };
             
             $scope.$watch('offer.StartDateTime', function (newVal, oldVal) {

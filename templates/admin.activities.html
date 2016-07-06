@@ -1,6 +1,50 @@
 <div ng-controller="ActivityController" ng-init="loadDefault()">
 	<h1>Activities</h1>
 	
+	<div class="accept-activity" ng-show="acceptActivityShow">
+		<h3>Accept Activity</h3>
+		
+		<div class="alert alert-danger" role="alert" ng-show="error.Status">{{error.Message}}</div>
+		<div class="alert alert-success" role="alert" ng-show="success.Status"><p ng-bind-html="renderHtml(success.Message)"></p></div>
+  
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<p>User: {{activity.User.FirstName}} {{activity.User.LastName}}</p>
+				
+				<p>Store: {{activity.Store.Name}}</p>
+				
+				<p>Reference Key: {{activity.ReferenceKey}}</p>
+			</div>
+			
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<form name="activityForm" ng-submit="activityForm.$valid && saveActivity(activity)">
+					<div class="row">
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+							<div class="form-group">
+					            <label for="RewardPoint">Rewards<span class="red">*</span>:</label>
+					            <input type="text" class="form-control" id="RewardPoint" ng-model="activity.RewardPoint" ng-required="true" />
+					        </div>
+						</div>
+						
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+							<div class="form-group">
+					            <label for="EstimatedDate">Date<span class="red">*</span>:</label>
+					            <input type="text" class="form-control" id="EstimatedDate" ng-model="activity.EstimatedDate" ng-required="true" jqdatepicker />
+					        </div>
+						</div>
+						
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+							<div class="form-group">
+								<label>&nbsp;</label><br />
+								<input type="submit" class="btn btn-primary" value="Submit" />
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
 	<div class="table-responsive">
 		<table datatable="" class="table table-hover table-striped table-bordered">
 		    <thead>
@@ -22,7 +66,7 @@
 			        <td>{{a.ReferenceKey}}</td>
 			        <td>{{formatDateTime(a.ClickDateTime)}}</td>
 			        <td style="text-align: center;">
-			        	<a href="#"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span></a>
+			        	<a href="javascript:void(0);" ng-click="acceptActivity(a)"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span></a>
 			        </td>
 			    </tr>
 		    </tbody>

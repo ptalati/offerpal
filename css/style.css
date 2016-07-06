@@ -146,7 +146,10 @@ header h1#logo > span {
 .navbar-default .navbar-nav > li.column-5 > ul {
 	padding-bottom: 10px;
 }
-.navbar-default .navbar-nav > li > ul > li > a {
+.navbar-default .navbar-nav > li.column-2 > ul > li > a,
+.navbar-default .navbar-nav > li.column-3 > ul > li > a,
+.navbar-default .navbar-nav > li.column-4 > ul > li > a,
+.navbar-default .navbar-nav > li.column-5 > ul > li > a {
 	text-transform: uppercase;
 	font-weight: bold;
 }
@@ -388,7 +391,7 @@ footer .copyright {
 
 .product {
     float: left;
-    width: 20%;
+    width: 18.3%;
     min-width: 165px;
     position: relative;
     margin: 10px;
@@ -1036,4 +1039,14 @@ h4 {
 .box img {
 	width: 100%;
 	height: auto;
+}
+
+.accept-activity {
+	border: 1px solid #eee;
+	padding: 15px 15px 5px;
+	margin-bottom: 15px;
+}
+.accept-activity h3 {
+	margin: 0 0 15px 0;
+	padding: 0 0 0 0;
 }

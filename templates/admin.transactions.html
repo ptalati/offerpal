@@ -1,0 +1,31 @@
+<div ng-controller="TransactionController" ng-init="loadDefault()">
+	<h1>Transactions</h1>
+	
+	<div class="table-responsive">
+		<table datatable="" class="table table-hover table-striped table-bordered">
+		    <thead>
+			    <tr>
+			        <th>ID</th>
+			        <th>User</th>
+			        <th>Reference #</th>
+			        <th>Points</th>
+			        <th>Date &amp; Time</th>
+			        <th>&nbsp;</th>
+			    </tr>
+		    </thead>
+		    
+		    <tbody>
+			    <tr ng-repeat="t in transactions">
+			        <td>{{t.Id}}</td>
+			        <td>{{t.User.FirstName}} {{t.User.LastName}}</td>
+			        <td>{{t.Activity.ReferenceKey}}</td>
+			        <td>{{t.RewardPoint}}</td>
+			        <td>{{formatDateTime(t.EstimatedDate)}}</td>
+			        <td style="text-align: center;">
+			        	<a href="javascript:void(0);" ng-click="deleteTransaction(t)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+			        </td>
+			    </tr>
+		    </tbody>
+		</table>
+	</div>
+</div>
