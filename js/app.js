@@ -5,6 +5,7 @@
       'ui.router', 
       'ngSanitize',
       'ngDialog',
+      'textAngular',
       'angular-loading-bar',
       'pageslide-directive',
       'ngFileUpload',

@@ -32,10 +32,10 @@
 	
 	.products {
 		display: block;
-		width: 100%;
+		width: 108%;
 	}
     .products .product { 
-    	width: 100%;
+    	width: 44%;
     	min-width: 0;
     }
     .products .product h3 {

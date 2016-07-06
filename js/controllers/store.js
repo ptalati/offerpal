@@ -17,6 +17,8 @@
                 Message: ''
             };
         	$scope.imageUpload = true;
+        	$scope.offset = 0;
+        	$scope.showMore = true;
 
             $scope.fetchOffers = function(categoryId, storeId) {
             	categoryId = categoryId || 0;
@@ -167,6 +169,22 @@
             	
             	$scope.store.Slug = $scope.generateSlug($scope.store.Name);
             }, true);
+            
+            $scope.fetchNextOffers = function() {
+            	$scope.offset = $scope.offset + 1;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/offer?storeId=" + $scope.store.Id + "&offset=" + $scope.offset).then(function (results) {
+            		if (results.data.length > 0) {
+	        		    $.each(results.data, function(index, value) {
+	        		    	$scope.offers.push(value);
+	        		    });
+            		} else {
+            			$scope.showMore = false;
+            		}
+		        });
+            };
         }
     ]);
 })();

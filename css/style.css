@@ -530,6 +530,7 @@ footer .copyright {
     display: block;
     position: relative;
     text-align: center;
+    height: 110px;
 }
 .featured-stores ul li a img {
     width: 150px;
@@ -561,7 +562,11 @@ footer .copyright {
     color: #000;
     font-weight: bold;
     font-size: 12px;
-    line-height: 22px;
+    line-height: 25px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
 .stores {
@@ -575,6 +580,7 @@ footer .copyright {
 .stores ul li {
     float: left;
     margin: 10px 0 10px 10px;
+    height: 110px;
 }
 .stores ul li a {
     border: 1px solid #ddd;

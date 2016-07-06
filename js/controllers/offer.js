@@ -18,6 +18,8 @@
                 Message: ''
             };
         	$scope.imageUpload = true;
+        	$scope.offset = 0;
+        	$scope.showMore = true;
 
             $scope.fetchCategories = function() {
                 $http.get(baseUrl + "api/category/all").then(function (results) {
@@ -38,6 +40,12 @@
             };
 
             $scope.fetchOffers = function() {
+                $http.get(baseUrl + "api/offer").then(function (results) {
+        		    $scope.offers = results.data;
+		        });
+            };
+
+            $scope.fetchOffersAll = function() {
                 $http.get(baseUrl + "api/offer/all").then(function (results) {
         		    $scope.offers = results.data;
 		        });
@@ -203,6 +211,22 @@
             	
             	$scope.offer.Slug = $scope.generateSlug($scope.offer.Name);
             }, true);
+            
+            $scope.fetchNextOffers = function() {
+            	$scope.offset = $scope.offset + 1;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/offer?offset=" + $scope.offset).then(function (results) {
+            		if (results.data.length > 0) {
+	        		    $.each(results.data, function(index, value) {
+	        		    	$scope.offers.push(value);
+	        		    });
+            		} else {
+            			$scope.showMore = false;
+            		}
+		        });
+            };
         }
     ]);
 })();

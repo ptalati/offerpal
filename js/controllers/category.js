@@ -15,6 +15,8 @@
                 Status: false,
                 Message: ''
             };
+        	$scope.offset = 0;
+        	$scope.showMore = true;
 
             $scope.fetchOffers = function(categoryId, storeId) {
             	categoryId = categoryId || 0;
@@ -78,6 +80,22 @@
             	
             	$scope.category.Slug = $scope.generateSlug($scope.category.Name);
             }, true);
+            
+            $scope.fetchNextOffers = function() {
+            	$scope.offset = $scope.offset + 1;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/offer?categoryId=" + $scope.category.Id + "&offset=" + $scope.offset).then(function (results) {
+            		if (results.data.length > 0) {
+	        		    $.each(results.data, function(index, value) {
+	        		    	$scope.offers.push(value);
+	        		    });
+            		} else {
+            			$scope.showMore = false;
+            		}
+		        });
+            };
         }
     ]);
 })();

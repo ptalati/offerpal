@@ -7,5 +7,15 @@
 		<div class="thumbnail product" ng-repeat="offer in offers">
 			<product></product>
 		</div>
+		
+		<div class="clearfix"></div>
 	</div>
+	
+	<p>&nbsp;</p>
+	
+	<div class="text-center" ng-show="offers.length !== 0">
+		<a class="btn btn-default" href="javascript:void(0);" ng-click="fetchNextOffers()" ng-show="showMore">Load More</a>
+	</div>
+	
+	<p>&nbsp;</p>
 </div>
