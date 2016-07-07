@@ -18,30 +18,54 @@
 <div class="featured-products">
 	<h2><a ui-sref="offersfeatured">Featured Offers</a></h2>
 	
-	<div class="products">
+	<div class="row offers">
+		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6" ng-repeat="offer in featuredOffers">
+			<div class="product">
+				<product></product>
+			</div>
+		</div>
+		
+		<div class="clearfix"></div>
+	</div>
+	
+	<!--<div class="products">
 		<div class="thumbnail product" ng-repeat="offer in featuredOffers">
 			<product></product>
 		</div>
 		
 		<div class="clearfix"></div>
-	</div>
+	</div>-->
 </div>
+
+<p>&nbsp;</p>
 
 <div class="recent-products">
 	<h2><a ui-sref="offers">Recent Offers</a></h2>
 	
-	<div class="products">
+	<div class="row offers">
+		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6" ng-repeat="offer in offers">
+			<div class="product">
+				<product></product>
+			</div>
+		</div>
+		
+		<div class="clearfix"></div>
+	</div>
+	
+	<!--<div class="products">
 		<div class="thumbnail product" ng-repeat="offer in offers">
 			<product></product>
 		</div>
 		
 		<div class="clearfix"></div>
-	</div>
+	</div>-->
 </div>
+
+<p>&nbsp;</p>
 
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
-    	angular.element('#RootController').scope().refreshSlider();
+    	//angular.element('#RootController').scope().refreshSlider();
     	
         $(".move-actions .left").click(function () {
             $(".lSAction .lSPrev").click();

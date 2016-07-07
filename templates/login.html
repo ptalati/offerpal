@@ -3,10 +3,11 @@
 <div class="alert alert-danger" role="alert" ng-show="error.Status">{{error.Message}}</div>
 <div class="alert alert-success" role="alert" ng-show="success.Status"><p ng-bind-html="renderHtml(success.Message)"></p></div>
   
-<div class="row">
+<div class="row" ng-controller="LoginController">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 		<div class="login">
 		    <form name="loginForm" class="form-container" ng-submit="loginForm.$valid && loginUser(login)" ng-hide="success.Status">
+		    	{{loginForm.$valid}}
 		        <div class="form-group">
 		            <label for="email">Email<span class="red">*</span>:</label>
 		            <input type="email" class="form-control" id="email" ng-model="login.Email" ng-required="true" />

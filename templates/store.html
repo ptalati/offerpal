@@ -3,7 +3,7 @@
 	
 	<h1>{{store.Name}}</h1>
 	
-	<div class="row">
+	<div class="row offers">
 	  	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 	    	<div class="image-box"><img ng-src="{{imageLoad(store.Logo)}}" alt="{{store.Name}}" /></div>
 	  	</div>
@@ -17,9 +17,11 @@
 	
 	<hr />
 	
-	<div class="products">
-		<div class="thumbnail product" ng-repeat="offer in offers">
-			<product></product>
+	<div class="row">
+		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6" ng-repeat="offer in offers">
+			<div class="product">
+				<product></product>
+			</div>
 		</div>
 		
 		<div class="clearfix"></div>

@@ -28,7 +28,7 @@
     //app.constant('baseUrl', 'http://localhost:51096/');
     app.constant('baseUrl', 'http://api.offerpal.in/');
     app.constant('isMobile', navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i));
-    //app.constant('webUrl', 'http://localhost:403/');
+    app.constant('webUrl', 'http://localhost:403/');
     app.constant('webUrl', 'http://beta.offerpal.in/');
     
     app.config([
@@ -60,8 +60,7 @@
                 templateUrl: 'templates/home.html'
             }).state("login", {
                 url: "/login",
-                templateUrl: 'templates/login.html',
-                controller: 'LoginController'
+                templateUrl: 'templates/login.html'
             }).state("logout", {
                 url: "/logout",
                 template: 'Logout',
@@ -81,8 +80,7 @@
                 }
             }).state("register", {
                 url: "/register",
-                templateUrl: 'templates/register.html',
-                controller: 'RegisterController'
+                templateUrl: 'templates/register.html'
             }).state("register.complete", {
                 url: "/complete",
                 templateUrl: 'templates/register.complete.html'
@@ -237,6 +235,14 @@
         	$scope.counter = 5;
         	$scope.balance = {};
         	
+        	$scope.$on('cfpLoadingBar:completed', function () {
+                console.log('Loading Finished');
+                
+                if ($location.path() === "/" || $location.path() === "") {
+                	$scope.refreshSlider();
+                }
+            });
+        	
 	        $scope.fetchCategories = function() {
 	        	$http.get(baseUrl + "api/category").then(function (results) {
         		    $scope.categories = results.data;
@@ -246,8 +252,6 @@
 	        $scope.fetchStores = function() {
 	        	$http.get(baseUrl + "api/store").then(function (results) {
         		    $scope.stores = results.data;
-        		    
-        		    $scope.refreshSlider();
 		        });
 	        };
         	
@@ -333,10 +337,12 @@
             });
             
             $scope.refreshSlider = function() {
+            	console.log("Slider created");
+            	
             	$('#featured-stores').lightSlider({
                     item: 5,
-                    auto: false,
-                    loop: false,
+                    auto: true,
+                    loop: true,
                     pauseOnHover: true,
                     slideMove: 2,
                     easing: 'cubic-bezier(0.25, 0, 0.25, 1)',

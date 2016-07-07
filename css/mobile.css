@@ -29,6 +29,14 @@
     .action li:nth-child(2) { 
     	border-left: none; 
     }
+    
+    .featured-stores ul li a {
+    	height: 100px;
+    }
+    
+    .stores ul li {
+    	height: 90px;
+    }
 	
 	.products {
 		display: block;
@@ -36,7 +44,7 @@
 		margin: 0;
 	}
     .products .product { 
-    	width: 48.7%;
+    	width: 48.2%;
     	min-width: 0;
     	margin: 10px 10px 10px 0;
     }
@@ -45,6 +53,17 @@
     }
     .products .product h3 {
     	margin-top: -50px;
+    }
+    
+    .row.offers .product h3 {
+    	overflow: hidden;
+    	font-size: 100%;
+    }
+    .row.offers .product .caption i a {
+    	display: block;
+    }
+    .row.offers .product .offer_price {
+    	font-size: 100%;
     }
 
     footer > .wrapper { 

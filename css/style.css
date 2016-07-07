@@ -386,11 +386,53 @@ footer .copyright {
     color: #fff;
 }
 
+.row.offers {
+	margin-left: -5px;
+	margin-right: -5px;
+}
+.row.offers .col-lg-2,
+.row.offers .col-md-2 {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.row.offers .product {
+	position: relative;
+	margin-top: 10px;
+	margin-bottom: 0 10px 10px;
+	border: 1px solid #ddd;
+}
+.row.offers .product h3 {
+    font-size: 16px;
+    position: absolute;
+    background: rgba(50, 50, 50, 0.9);
+    padding: 10px;
+    margin-top: -65px;
+    left: 0px;
+    width: 100%;
+    min-height: 54px;
+}
+.row.offers .product h3 a {
+    color: #fff;
+}
+.row.offers .product .caption {
+    padding: 10px;
+}
+.row.offers .product .image {
+    height: 200px;
+    display: block;
+    overflow: hidden;
+    background: #eee;
+}
+.row.offers .product img {
+    width: 100%;
+    height: auto;
+}
+
 .products {
     margin: 0 -10px;
 }
 
-.product {
+.products .product {
     float: left;
     width: 18.3%;
     min-width: 165px;
@@ -398,7 +440,7 @@ footer .copyright {
     margin: 10px;
     border-radius: 0;
 }
-.product h3 {
+.products .product h3 {
     font-size: 16px;
     position: absolute;
     background: rgba(50, 50, 50, 0.9);
@@ -408,10 +450,10 @@ footer .copyright {
     width: 100%;
     min-height: 54px;
 }
-.product h3 a {
+.products .product h3 a {
     color: #fff;
 }
-.product .image {
+.products .product .image {
     height: 200px;
     display: block;
     overflow: hidden;

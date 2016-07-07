@@ -3,7 +3,7 @@
 <div class="alert alert-danger" role="alert" ng-show="error.Status">{{error.Message}}</div>
 <div class="alert alert-success" role="alert" ng-show="success.Status">{{success.Message}}</div>
 
-<div class="row" ng-hide="success.Status">
+<div class="row" ng-hide="success.Status" ng-controller="RegisterController">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 		<div class="register">
 		    <form name="registerForm" class="form-container" ng-submit="registerForm.$valid && registerUser(register)">
