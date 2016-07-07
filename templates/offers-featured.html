@@ -1,11 +1,15 @@
 <div ng-controller="OfferController" ng-init="loadFeaturedDefault()">
-	<div class="breadcrumb"><a ui-sref="welcome">Home</a> > Offers</div>
+	<div class="breadcrumb"><a ui-sref="welcome">Home</a> > <a ui-sref="offers">Offers</a> > Featured Offers</div>
 	
-	<h1>Offers</h1>
+	<h1>Featured Offers</h1>
 	
-	<div class="offers products">
-		<div class="thumbnail product" ng-repeat="offer in offers">
-			<product></product>
+	<div class="row offers">
+		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6" ng-repeat="offer in offers">
+			<div class="product">
+				<product></product>
+			</div>
 		</div>
+		
+		<div class="clearfix"></div>
 	</div>
 </div>

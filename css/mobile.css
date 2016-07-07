@@ -6,6 +6,10 @@
     header h1 { 
     	text-align: center; 
     }
+    
+    .top-action {
+    	padding-top: 38px;
+    }
 
     .wrapper.top .row .col-md-5 { 
     	display: none; 
@@ -92,6 +96,10 @@
 		color: #fff;
 		padding: 5px 0;
 		display: block;
+		width: 100%;
+		position: fixed;
+		top: 0;
+		z-index: 1000;
 	}
 	.mobile-menu a {
 		color: #fff;
@@ -205,5 +213,18 @@
 		float: left;
 		margin: 5px;
 		border-radius: 5px;
+	}
+	
+	.container {
+		padding-bottom: 5em;
+	}
+	
+	footer {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+	}
+	footer .row:first-child {
+		margin-bottom: 0;
 	}
 }
