@@ -35,11 +35,17 @@
 		        });
             };
 
-            $scope.fetchStores = function() {
+            $scope.fetchStoresAll = function() {
                 $http.get(baseUrl + "api/store/all").then(function (results) {
         		    $scope.stores = results.data;
 		        });
             };
+        	
+	        $scope.fetchStores = function() {
+	        	$http.get(baseUrl + "api/store").then(function (results) {
+        		    $scope.stores = results.data;
+		        });
+	        };
 
             $scope.fetchStore = function(storeId) {
                 $http.get(baseUrl + "api/store?id=" + storeId).then(function (results) {
@@ -98,7 +104,7 @@
             };
 
             $scope.loadDefault = function () {
-            	$scope.fetchStores();
+            	$scope.fetchStoresAll();
                 
                 console.log($state.params.storeId);
                 
@@ -114,12 +120,12 @@
             $scope.loadFrontDefault = function() {
                 if ($state.params.storeSlug) {
                 	$scope.fetchStoreBySlug($state.params.storeSlug);
-                }
-                
-                if ($state.params.storeId) {
+                } else if ($state.params.storeId) {
                 	if ($state.params.storeId > 0) {
                 		$scope.fetchStore($state.params.storeId);
                 	}
+                } else {
+                	$scope.fetchStores();
                 }
             };
             
@@ -183,6 +189,24 @@
             		} else {
             			$scope.showMore = false;
             		}
+		        });
+            };
+            
+            $scope.fetchNextStores = function() {
+            	$scope.offset = $scope.offset + 1;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/store?offset=" + $scope.offset).success(function (results) {
+            		if (results.length > 0) {
+	        		    $.each(results, function(index, value) {
+	        		    	$scope.stores.push(value);
+	        		    });
+            		} else {
+            			$scope.showMore = false;
+            		}
+		        }).error(function (data, status, headers, config) {
+		        	$scope.offset = $scope.offset - 1;
 		        });
             };
         }
