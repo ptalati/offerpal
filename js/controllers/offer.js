@@ -19,7 +19,10 @@
             };
         	$scope.imageUpload = true;
         	$scope.offset = 0;
+        	$scope.pageSize = 20;
         	$scope.showMore = true;
+        	$scope.showNext = true;
+        	$scope.showPrev = false;
 
             $scope.fetchCategories = function() {
                 $http.get(baseUrl + "api/category/all").then(function (results) {
@@ -46,8 +49,10 @@
             };
 
             $scope.fetchOffersAll = function() {
-                $http.get(baseUrl + "api/offer/all").then(function (results) {
+                $http.get(baseUrl + "api/offer/all?offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).then(function (results) {
         		    $scope.offers = results.data;
+        		    
+        		    if ($scope.offers.length < $scope.pageSize) $scope.showNext = false;
 		        });
             };
         	
@@ -122,7 +127,7 @@
             };
 
             $scope.loadDefault = function() {
-                $scope.fetchOffers();
+                $scope.fetchOffersAll();
                 
                 console.log($state.params.offerId);
                 
@@ -217,7 +222,64 @@
             	
             	console.log($scope.offset);
             	
-            	$http.get(baseUrl + "api/offer?offset=" + $scope.offset).then(function (results) {
+            	$http.get(baseUrl + "api/offer?offset=" + $scope.offset).success(function (results) {
+            		if (results.length > 0) {
+	        		    $.each(results, function(index, value) {
+	        		    	$scope.offers.push(value);
+	        		    });
+            		} else {
+            			$scope.showMore = false;
+            		}
+		        }).error(function (data, status, headers, config) {
+		        	$scope.offset = $scope.offset - 1;
+		        });
+            };
+            
+            $scope.fetchNextAdmin = function() {
+            	$scope.offset = $scope.offset + 1;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/offer/all?offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).success(function (results) {
+            		console.log(results.length);
+            		
+            		if (results.length > 0) {
+            			$scope.offers = results;
+            		}
+            		
+            		if (results.length > 0 && results.length == $scope.pageSize) {
+            			$scope.showNext = true;
+            		} else {
+            			$scope.showNext = false;
+            		}
+		        }).error(function (data, status, headers, config) {
+		        	$scope.offset = $scope.offset - 1;
+		        });
+            };
+            
+            $scope.fetchPreviousAdmin = function() {
+            	$scope.offset = $scope.offset - 1;
+            	$scope.showNext = true;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/offer/all?offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).success(function (results) {
+            		console.log(results.length);
+            		
+            		if (results.length > 0) {
+	        		    $scope.offers = results;
+            		}
+		        }).error(function (data, status, headers, config) {
+		        	$scope.offset = $scope.offset + 1;
+		        });
+            };
+            
+            $scope.fetchNextFeaturedOffers = function() {
+            	$scope.offset = $scope.offset + 1;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/offer/featured?offset=" + $scope.offset).then(function (results) {
             		if (results.data.length > 0) {
 	        		    $.each(results.data, function(index, value) {
 	        		    	$scope.offers.push(value);
@@ -227,6 +289,11 @@
             		}
 		        });
             };
+            
+            $scope.$watch('offset', function (newVal, oldVal) {
+            	if ($scope.offset > 0) $scope.showPrev = true;
+            	else $scope.showPrev = false;
+            }, true);
         }
     ]);
 })();

@@ -17,6 +17,9 @@
             };
         	$scope.offset = 0;
         	$scope.showMore = true;
+        	$scope.pageSize = 20;
+        	$scope.showNext = true;
+        	$scope.showPrev = false;
 
             $scope.fetchOffers = function(categoryId, storeId) {
             	categoryId = categoryId || 0;
@@ -27,8 +30,16 @@
 		        });
             };
 
+            $scope.fetchCategoriesAll = function() {
+                $http.get(baseUrl + "api/category/all?offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).then(function (results) {
+        		    $scope.categories = results.data;
+        		    
+        		    if ($scope.categories.length < $scope.pageSize) $scope.showNext = false;
+		        });
+            };
+
             $scope.fetchCategories = function() {
-                $http.get(baseUrl + "api/category/all").then(function (results) {
+                $http.get(baseUrl + "api/category?pageSize=-1").then(function (results) {
         		    $scope.categories = results.data;
 		        });
             };
@@ -62,7 +73,7 @@
             };
 
             $scope.loadDefault = function () {
-                $scope.fetchCategories();
+                $scope.fetchCategoriesAll();
                 
                 console.log($state.params.categoryId);
                 
@@ -96,6 +107,50 @@
             		}
 		        });
             };
+            
+            $scope.fetchNextAdmin = function() {
+            	$scope.offset = $scope.offset + 1;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/category/all?offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).success(function (results) {
+            		console.log(results.length);
+            		
+            		if (results.length > 0) {
+            			$scope.categories = results;
+            		}
+            		
+            		if (results.length > 0 && results.length == $scope.pageSize) {
+            			$scope.showNext = true;
+            		} else {
+            			$scope.showNext = false;
+            		}
+		        }).error(function (data, status, headers, config) {
+		        	$scope.offset = $scope.offset - 1;
+		        });
+            };
+            
+            $scope.fetchPreviousAdmin = function() {
+            	$scope.offset = $scope.offset - 1;
+            	$scope.showNext = true;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/category/all?offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).success(function (results) {
+            		console.log(results.length);
+            		
+            		if (results.length > 0) {
+	        		    $scope.categories = results;
+            		}
+		        }).error(function (data, status, headers, config) {
+		        	$scope.offset = $scope.offset + 1;
+		        });
+            };
+            
+            $scope.$watch('offset', function (newVal, oldVal) {
+            	if ($scope.offset > 0) $scope.showPrev = true;
+            	else $scope.showPrev = false;
+            }, true);
         }
     ]);
 })();

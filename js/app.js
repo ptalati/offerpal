@@ -81,8 +81,8 @@
             }).state("register", {
                 url: "/register",
                 templateUrl: 'templates/register.html'
-            }).state("register.complete", {
-                url: "/complete",
+            }).state("registered", {
+                url: "/registered",
                 templateUrl: 'templates/register.complete.html'
             }).state("admin", {
                 url: "/admin",
@@ -244,13 +244,13 @@
             });
         	
 	        $scope.fetchCategories = function() {
-	        	$http.get(baseUrl + "api/category").then(function (results) {
+	        	$http.get(baseUrl + "api/category?pageSize=-1").then(function (results) {
         		    $scope.categories = results.data;
 		        });
 	        };
         	
 	        $scope.fetchStores = function() {
-	        	$http.get(baseUrl + "api/store").then(function (results) {
+	        	$http.get(baseUrl + "api/store?pageSize=-1").then(function (results) {
         		    $scope.stores = results.data;
 		        });
 	        };
@@ -434,7 +434,7 @@
                 $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
                 
                 return $slug.toLowerCase();
-            }
+            };
 	    }
 	]);
 })();

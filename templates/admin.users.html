@@ -39,5 +39,10 @@
 		</table>
 	</div>
 	
-	<p><a ui-sref="admin.invite">Invite users to offerpal.in</a></p>
+	<div class="actions text-center">
+        <a ng-click="fetchPreviousAdmin()" ng-show="showPrev" href="javascript:void(0);" class="btn btn-default"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+        <a ng-click="fetchNextAdmin()" ng-show="showNext" href="javascript:void(0);" class="btn btn-default"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+    </div>
+    
+    <p>&nbsp;</p>
 </div>

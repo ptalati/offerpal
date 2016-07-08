@@ -31,7 +31,7 @@
                         Message: 'Registration completed. Please verify your account and login.'
                     };
                     
-                    $state.go("register.complete");
+                    $state.go("registered");
 
                     console.log("User created.");
                 }).error(function (data, status, headers, config) {

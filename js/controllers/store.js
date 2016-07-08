@@ -19,6 +19,9 @@
         	$scope.imageUpload = true;
         	$scope.offset = 0;
         	$scope.showMore = true;
+        	$scope.pageSize = 20;
+        	$scope.showNext = true;
+        	$scope.showPrev = false;
 
             $scope.fetchOffers = function(categoryId, storeId) {
             	categoryId = categoryId || 0;
@@ -36,13 +39,15 @@
             };
 
             $scope.fetchStoresAll = function() {
-                $http.get(baseUrl + "api/store/all").then(function (results) {
+                $http.get(baseUrl + "api/store/all?offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).then(function (results) {
         		    $scope.stores = results.data;
+        		    
+        		    if ($scope.stores.length < $scope.pageSize) $scope.showNext = false;
 		        });
             };
         	
 	        $scope.fetchStores = function() {
-	        	$http.get(baseUrl + "api/store").then(function (results) {
+	        	$http.get(baseUrl + "api/store?pageSize=-1").then(function (results) {
         		    $scope.stores = results.data;
 		        });
 	        };
@@ -126,6 +131,7 @@
                 	}
                 } else {
                 	$scope.fetchStores();
+                	$scope.page.setTitle("Stores");
                 }
             };
             
@@ -181,14 +187,16 @@
             	
             	console.log($scope.offset);
             	
-            	$http.get(baseUrl + "api/offer?storeId=" + $scope.store.Id + "&offset=" + $scope.offset).then(function (results) {
-            		if (results.data.length > 0) {
-	        		    $.each(results.data, function(index, value) {
+            	$http.get(baseUrl + "api/offer?storeId=" + $scope.store.Id + "&offset=" + $scope.offset).success(function (results) {
+            		if (results.length > 0) {
+	        		    $.each(results, function(index, value) {
 	        		    	$scope.offers.push(value);
 	        		    });
             		} else {
             			$scope.showMore = false;
             		}
+		        }).error(function (data, status, headers, config) {
+		        	$scope.offset = $scope.offset - 1;
 		        });
             };
             
@@ -209,6 +217,50 @@
 		        	$scope.offset = $scope.offset - 1;
 		        });
             };
+            
+            $scope.fetchNextAdmin = function() {
+            	$scope.offset = $scope.offset + 1;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/store?offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).success(function (results) {
+            		console.log(results.length);
+            		
+            		if (results.length > 0) {
+            			$scope.stores = results;
+            		}
+            		
+            		if (results.length > 0 && results.length == $scope.pageSize) {
+            			$scope.showNext = true;
+            		} else {
+            			$scope.showNext = false;
+            		}
+		        }).error(function (data, status, headers, config) {
+		        	$scope.offset = $scope.offset - 1;
+		        });
+            };
+            
+            $scope.fetchPreviousAdmin = function() {
+            	$scope.offset = $scope.offset - 1;
+            	$scope.showNext = true;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/store?offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).success(function (results) {
+            		console.log(results.length);
+            		
+            		if (results.length > 0) {
+	        		    $scope.stores = results;
+            		}
+		        }).error(function (data, status, headers, config) {
+		        	$scope.offset = $scope.offset + 1;
+		        });
+            };
+            
+            $scope.$watch('offset', function (newVal, oldVal) {
+            	if ($scope.offset > 0) $scope.showPrev = true;
+            	else $scope.showPrev = false;
+            }, true);
         }
     ]);
 })();

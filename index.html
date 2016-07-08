@@ -81,7 +81,7 @@
             </div>
             
             <div class="row top-action">
-                <div class="col-md-3"><h1 id="logo"><a href="/"><img ng-src="{{logoLoad('logo.png')}}" alt="offerpal" /></a></h1></div>
+                <div class="col-md-3"><h1 id="logo"><a ui-sref="welcome"><img ng-src="{{logoLoad('logo.png')}}" alt="offerpal" /></a></h1></div>
 				
 				<div class="col-md-9 search-box">
 					<form class="form-inline">
@@ -130,7 +130,7 @@
                 <div class="container-fluid">
                 	<div  class="collapse navbar-collapse navigation">
 		                <ul id="menu" class="nav navbar-nav">
-		                	<li ui-sref-active-eq="active"><a href="/">Home</a></li>
+		                	<li ui-sref-active-eq="active"><a ui-sref="welcome">Home</a></li>
 		                	<li ui-sref-active-eq="active" ng-repeat="c in categories | categoryFilter:0" class="{{showDropDown(c.Id) > 0 ? 'columns' : ''}} {{c.Class}}">
 		                		<a ui-sref="category({categorySlug: c.Slug})">{{c.Name}}</a>
 		                		
@@ -229,7 +229,7 @@
             <ul id="menu">
             	<li ui-sref-active-eq="active"><a ui-sref="stores">Popular Stores</a></li>
                 <li ui-sref-active-eq="active"><a ui-sref="offers">Popular Products</a></li>
-	          	<li ui-sref-active-eq="active"><a href="/">Home</a></li>
+	          	<li ui-sref-active-eq="active"><a ui-sref="welcome">Home</a></li>
 	          	<li ui-sref-active-eq="active" ng-repeat="c in categories | categoryFilter:0" class="column-{{showDropDown(c.Id)}}">
           			<a ui-sref="category({categorySlug: c.Slug})">{{c.Name}}</a>
           			

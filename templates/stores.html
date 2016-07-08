@@ -1,4 +1,4 @@
-<div ng-controller="StoreController" ng-init="loadFrontDefault()">
+<div>
 	<div class="breadcrumb"><a ui-sref="welcome">Home</a> > Stores</div>
 	
 	<h1>Stores</h1>
@@ -9,12 +9,6 @@
 				<a ui-sref="store({storeSlug: s.Slug})" title="{{s.Name}}"><img ng-src="{{imageLoad(s.Logo)}}" alt="{{s.Name}}" /><p>{{s.Slogan}}</p></a>
 			</li>
 		</ul>
-	</div>
-	
-	<p>&nbsp;</p>
-	
-	<div class="text-center" ng-show="stores.length !== 0">
-		<a class="btn btn-default" href="javascript:void(0);" ng-click="fetchNextStores()" ng-show="showMore">Load More</a>
 	</div>
 	
 	<p>&nbsp;</p>

@@ -16,6 +16,10 @@
                 Message: ''
             };
             $scope.verificationComplete = false;
+        	$scope.offset = 0;
+        	$scope.pageSize = 20;
+        	$scope.showNext = true;
+        	$scope.showPrev = false;
 
             $scope.fetchUserTypes = function() {
                 $http.get(baseUrl + "api/common/usertypes").then(function (results) {
@@ -24,8 +28,10 @@
             };
 
             $scope.fetchUsers = function() {
-                $http.get(baseUrl + "api/user?token=" + $scope.token.Token).then(function (results) {
+                $http.get(baseUrl + "api/user?token=" + $scope.token.Token + "&offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).then(function (results) {
         		    $scope.users = results.data;
+        		    
+        		    if ($scope.users.length < $scope.pageSize) $scope.showNext = false;
 		        });
             };
 
@@ -36,7 +42,9 @@
             };
             
             $scope.verifyUser = function(emailToken) {
-            	$http.get(baseUrl + "api/account/verify?emailToken=" + emailToken).then(function (results) {
+				console.log($state.params.emailToken);
+				
+            	$http.get(baseUrl + "api/account/verify?emailToken=" + encodeURIComponent(emailToken)).then(function (results) {
         		    $scope.verificationComplete = results.data;
 		        });
             }
@@ -100,13 +108,57 @@
             };
             
             $scope.changePassword = function(reset) {
-            	$http.post(baseUrl + "api/account/changepassword?emailToken=" + $state.params.emailToken + "&password=" + reset.Password).then(function (results) {
+            	$http.post(baseUrl + "api/account/changepassword?emailToken=" + encodeURIComponent($state.params.emailToken) + "&password=" + reset.Password).then(function (results) {
             		$scope.success = {
                         Status: true,
                         Message: 'Your password has been updated, please try login again.'
                     };
 		        });
             };
+            
+            $scope.fetchNextAdmin = function() {
+            	$scope.offset = $scope.offset + 1;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/user?token=" + $scope.token.Token + "&offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).success(function (results) {
+            		console.log(results.length);
+            		
+            		if (results.length > 0) {
+            			$scope.users = results;
+            		}
+            		
+            		if (results.length > 0 && results.length == $scope.pageSize) {
+            			$scope.showNext = true;
+            		} else {
+            			$scope.showNext = false;
+            		}
+		        }).error(function (data, status, headers, config) {
+		        	$scope.offset = $scope.offset - 1;
+		        });
+            };
+            
+            $scope.fetchPreviousAdmin = function() {
+            	$scope.offset = $scope.offset - 1;
+            	$scope.showNext = true;
+            	
+            	console.log($scope.offset);
+            	
+            	$http.get(baseUrl + "api/user?token=" + $scope.token.Token + "&offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).success(function (results) {
+            		console.log(results.length);
+            		
+            		if (results.length > 0) {
+	        		    $scope.users = results;
+            		}
+		        }).error(function (data, status, headers, config) {
+		        	$scope.offset = $scope.offset + 1;
+		        });
+            };
+            
+            $scope.$watch('offset', function (newVal, oldVal) {
+            	if ($scope.offset > 0) $scope.showPrev = true;
+            	else $scope.showPrev = false;
+            }, true);
         }
     ]);
 })();

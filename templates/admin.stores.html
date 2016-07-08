@@ -7,7 +7,7 @@
 			    <tr>
 			        <th>ID</th>
 			        <th>Name</th>
-			        <th>Slug</th>
+			        <th>Slogan</th>
 			        <th>Type</th>
 			        <th style="width: 100px;">&nbsp;</th>
 			    </tr>
@@ -17,7 +17,7 @@
 			    <tr ng-repeat="s in stores">
 			        <td>{{s.Id}}</td>
 			        <td>{{s.Name}}</td>
-			        <td>{{s.Slug}}</td>
+			        <td>{{s.Slogan}}</td>
 			        <td>{{s.Type.Name}}</td>
 			        <td style="text-align: center;">
 			        	<span class="glyphicon glyphicon-asterisk {{s.Featured ? '' : 'disabled'}}" aria-hidden="true"></span>&nbsp;
@@ -29,4 +29,11 @@
 		    </tbody>
 		</table>
 	</div>
+	
+	<div class="actions text-center">
+        <a ng-click="fetchPreviousAdmin()" ng-show="showPrev" href="javascript:void(0);" class="btn btn-default"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+        <a ng-click="fetchNextAdmin()" ng-show="showNext" href="javascript:void(0);" class="btn btn-default"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+    </div>
+    
+    <p>&nbsp;</p>
 </div>
