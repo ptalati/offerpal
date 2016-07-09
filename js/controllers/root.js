@@ -40,7 +40,10 @@
             		    $scope.balance = results.data;
     		        });
                 } else {
-                	$scope.balance = {};
+                	$scope.balance = {
+            			"PendingPoints": 0.0,
+            			"AvailablePoints": 0.0
+        			};
                 }
             };
 	        
