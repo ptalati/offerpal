@@ -2,12 +2,9 @@
     var app = angular.module('root-controller', ['angular-loading-bar']);
 
 	app.controller('RootController', [
-        '$scope', '$http', '$log', '$interval', '$rootScope', 'baseUrl', 'webUrl', 'isMobile', '$location', '$window', '$sce', '$state', '$timeout',
+        '$scope', '$http', '$log', '$interval', '$rootScope', 'baseUrl', 'webUrl', 'isMobile', '$location', '$window', '$sce', '$state', '$timeout', 
         function ($scope, $http, $log, $interval, $rootScope, baseUrl, webUrl, isMobile, $location, $window, $sce, $state, $timeout) {
         	$scope.categories = [];
-        	$scope.stores = [];
-        	$scope.offers = [];
-        	$scope.featuredOffers = [];
         	$scope.token = null;
         	$scope.mobile = isMobile;
         	$scope.menu = false;
@@ -28,24 +25,6 @@
         		    $scope.categories = results.data;
 		        });
 	        };
-        	
-	        $scope.fetchStores = function() {
-	        	$http.get(baseUrl + "api/store?pageSize=-1").then(function (results) {
-        		    $scope.stores = results.data;
-		        });
-	        };
-        	
-	        $scope.fetchOffers = function() {
-	        	$http.get(baseUrl + "api/offer?pageSize=6").then(function (results) {
-    		    	$scope.offers = results.data;
-		        });
-	        };
-        	
-	        $scope.fetchFeaturedOffers = function() {
-	        	$http.get(baseUrl + "api/offer/featured?pageSize=6").then(function (results) {
-        		    $scope.featuredOffers = results.data;
-		        });
-	        };
 	        
 	        $scope.fetchUser = function () {
                 if (localStorage.getItem("offerpal_token")) {
@@ -54,20 +33,20 @@
             };
 	        
 	        $scope.fetchBalance = function () {
-                if ($scope.token !== null) {
-                	$http.get(baseUrl + "api/account/balance?token=" + $scope.token.Token).then(function (results) {
+	        	console.log($rootScope.token);
+	        	
+                if ($rootScope.token !== null) {
+                	$http.get(baseUrl + "api/account/balance?token=" + $rootScope.token.Token).then(function (results) {
             		    $scope.balance = results.data;
     		        });
+                } else {
+                	$scope.balance = {};
                 }
             };
 	        
 	        $scope.loadData = function() {
 	        	$scope.fetchCategories();
-	        	$scope.fetchStores();
-	        	$scope.fetchOffers();
-	        	$scope.fetchFeaturedOffers();
 	        	$scope.fetchUser();
-	        	$scope.fetchBalance();
 	        };
 	        
 	        $rootScope.$watch('token', function(newVal, oldVal) {
@@ -112,8 +91,7 @@
                 
                 if ($location.path() === '/' || $location.path().indexOf("admin") !== -1) $scope.page.setTitle('Cashback Offers, Discount Coupons, Best Online Deals');
                 if ($location.path().indexOf("redirect") !== -1) var countDown = $timeout($scope.onCountDown,1000);
-
-                $scope.loadData();
+                if ($location.path() === "/" || $location.path() === "") $scope.fetchBalance();
             });
             
             $scope.refreshSlider = function() {
@@ -121,8 +99,8 @@
             	
             	$('#featured-stores').lightSlider({
                     item: 5,
-                    auto: true,
-                    loop: true,
+                    auto: false,
+                    loop: false,
                     pauseOnHover: true,
                     slideMove: 2,
                     easing: 'cubic-bezier(0.25, 0, 0.25, 1)',

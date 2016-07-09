@@ -261,6 +261,18 @@
             	if ($scope.offset > 0) $scope.showPrev = true;
             	else $scope.showPrev = false;
             }, true);
+        	
+	        $scope.loadStoresSlider = function() {
+	        	$http.get(baseUrl + "api/store?pageSize=10").then(function (results) {
+        		    $scope.stores = results.data;
+		        });
+	        };
+        	
+	        $scope.loadStores = function() {
+	        	$http.get(baseUrl + "api/store?pageSize=-1").then(function (results) {
+        		    $scope.stores = results.data;
+		        });
+	        };
         }
     ]);
 })();

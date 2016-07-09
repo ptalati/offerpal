@@ -1,4 +1,4 @@
-<div class="featured-stores">
+<div class="featured-stores" ng-controller="StoreController" ng-init="loadStoresSlider()">
 	<div class="move-actions">
         <a href="javascript:void(0);" class="left"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
         <a href="javascript:void(0);" class="right"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
@@ -7,7 +7,7 @@
 	<h2><a ui-sref="stores">Featured Stores</a></h2>
 	
 	<ul id="featured-stores">
-		<li ng-repeat="s in stores | filter:{Featured: true}">
+		<li data-ng-repeat="s in stores | filter:{Featured: true}">
 			<a ui-sref="store({storeSlug: s.Slug})" title="{{s.Name}}"><img ng-src="{{imageLoad(s.Logo)}}" alt="{{s.Name}}" /><p>{{s.Slogan}}</p></a>
 		</li>
 	</ul>
@@ -15,34 +15,34 @@
 	<div class="clearfix"></div>
 </div>
 
-<div class="featured-products">
+<div class="featured-products" ng-controller="OfferController" ng-init="loadFeaturedOffers()">
 	<h2><a ui-sref="offersfeatured">Featured Offers</a></h2>
 	
-	<div class="row offers">
-		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6" data-ng-repeat="offer in featuredOffers">
+	<div class="row offers dynamic-grid" angular-grid="featuredOffers" grid-width="180" gutter-size="5" angular-grid-id="featuredOffers" refresh-on-img-load="true">
+		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6 grid" data-ng-repeat="offer in featuredOffers">
 			<div class="product">
 				<product></product>
 			</div>
 		</div>
-		
-		<div class="clearfix"></div>
 	</div>
+	
+	<div class="clearfix"></div>
 </div>
 
 <p>&nbsp;</p>
 
-<div class="recent-products">
+<div class="recent-products" ng-controller="OfferController" ng-init="loadRecentOffers()">
 	<h2><a ui-sref="offers">Recent Offers</a></h2>
 	
-	<div class="row offers">
-		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6" ng-repeat="offer in offers">
+	<div class="row offers dynamic-grid" angular-grid="offers" grid-width="180" gutter-size="5" angular-grid-id="offers" refresh-on-img-load="true">
+		<div class="col-lg-2 col-md-2 col-sm-3 col-xs-6 grid" data-ng-repeat="offer in offers">
 			<div class="product">
 				<product></product>
 			</div>
 		</div>
-		
-		<div class="clearfix"></div>
 	</div>
+	
+	<div class="clearfix"></div>
 </div>
 
 <p>&nbsp;</p>

@@ -294,6 +294,18 @@
             	if ($scope.offset > 0) $scope.showPrev = true;
             	else $scope.showPrev = false;
             }, true);
+            
+            $scope.loadFeaturedOffers = function() {
+            	$http.get(baseUrl + "api/offer/featured?pageSize=6").then(function (results) {
+        		    $scope.featuredOffers = results.data;
+		        });
+            };
+            
+            $scope.loadRecentOffers = function() {
+            	$http.get(baseUrl + "api/offer?pageSize=12&featured=false").then(function (results) {
+    		    	$scope.offers = results.data;
+		        });
+            };
         }
     ]);
 })();
