@@ -1159,3 +1159,11 @@ h4 {
   visibility: visible;
   opacity: 1;
 }
+
+.banners {
+	padding-bottom: 15px;
+}
+.banners img {
+	width: 100%;
+	height: auto;
+}

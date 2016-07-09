@@ -31,7 +31,7 @@
     app.constant('baseUrl', 'http://api.offerpal.in/');
     app.constant('isMobile', navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i));
     //app.constant('webUrl', 'http://localhost:403/');
-    app.constant('webUrl', 'http://beta.offerpal.in/');
+    app.constant('webUrl', 'http://www.offerpal.in/');
     
     app.config([
         'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
