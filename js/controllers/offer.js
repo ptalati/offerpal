@@ -25,13 +25,13 @@
         	$scope.showPrev = false;
 
             $scope.fetchCategories = function() {
-                $http.get(baseUrl + "api/category/all").then(function (results) {
+                $http.get(baseUrl + "api/category?pageSize=-1").then(function (results) {
         		    $scope.categories = results.data;
 		        });
             };
 
             $scope.fetchStores = function() {
-                $http.get(baseUrl + "api/store/all").then(function (results) {
+                $http.get(baseUrl + "api/store?pageSize=-1").then(function (results) {
         		    $scope.stores = results.data;
 		        });
             };
