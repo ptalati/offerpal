@@ -1,45 +1,46 @@
-<h1>User Login</h1>
-
-<div class="alert alert-danger" role="alert" ng-show="error.Status">{{error.Message}}</div>
-<div class="alert alert-success" role="alert" ng-show="success.Status"><p ng-bind-html="renderHtml(success.Message)"></p></div>
-  
-<div class="row" ng-controller="LoginController">
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-		<div class="login">
-		    <form name="loginForm" class="form-container" ng-submit="loginForm.$valid && loginUser(login)" ng-hide="success.Status">
-		    	{{loginForm.$valid}}
-		        <div class="form-group">
-		            <label for="email">Email<span class="red">*</span>:</label>
-		            <input type="email" class="form-control" id="email" ng-model="login.Email" ng-required="true" />
-		        </div>
-		
-		        <div class="form-group">
-		            <label for="password">Password<span class="red">*</span>:</label>
-		            <input type="password" class="form-control" id="password" ng-model="login.Password" ng-required="true" />
-		        </div>
-		        
-		        <div class="row">
-		        	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-		        		<div class="checkbox"><label><input type="checkbox"> Keep me logged in</label></div>
-		        	</div>
-		        	
-		        	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
-		        		<a ui-sref="forgotpassword" ng-hide="success.Status">Forgot password?</a>
-		        	</div>
-		        </div>
-		
-		        <input type="submit" class="btn btn-primary" value="Login" />
-		    </form>
+<div ng-controller="LoginController" ng-init="loadDefault()">
+	<h1>User Login</h1>
+	
+	<div class="alert alert-danger" role="alert" ng-show="error.Status">{{error.Message}}</div>
+	<div class="alert alert-success" role="alert" ng-show="success.Status"><p ng-bind-html="renderHtml(success.Message)"></p></div>
+	  
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div class="login">
+			    <form name="loginForm" class="form-container" ng-submit="loginForm.$valid && loginUser(login)" ng-hide="success.Status">
+			    	<div class="form-group">
+			            <label for="email">Email<span class="red">*</span>:</label>
+			            <input type="email" class="form-control" id="email" ng-model="login.Email" ng-required="true" />
+			        </div>
+			
+			        <div class="form-group">
+			            <label for="password">Password<span class="red">*</span>:</label>
+			            <input type="password" class="form-control" id="password" ng-model="login.Password" ng-required="true" />
+			        </div>
+			        
+			        <div class="row">
+			        	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			        		<div class="checkbox"><label><input type="checkbox"> Keep me logged in</label></div>
+			        	</div>
+			        	
+			        	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right">
+			        		<a ui-sref="forgotpassword" ng-hide="success.Status">Forgot password?</a>
+			        	</div>
+			        </div>
+			
+			        <input type="submit" class="btn btn-primary" value="Login" />
+			    </form>
+			</div>
+			
+			<p>&nbsp;</p>
+			
+			<p>Don't have a Offerpal.in account? <a ui-sref="register" ng-hide="success.Status">Get A FREE Account</a></p>
 		</div>
 		
-		<p>&nbsp;</p>
-		
-		<p>Don't have a Offerpal.in account? <a ui-sref="register" ng-hide="success.Status">Get A FREE Account</a></p>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<p>&nbsp;</p>
+		</div>
 	</div>
 	
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-		<p>&nbsp;</p>
-	</div>
+	<p>&nbsp;</p>
 </div>
-
-<p>&nbsp;</p>

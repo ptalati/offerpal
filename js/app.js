@@ -10,6 +10,7 @@
       'pageslide-directive',
       'ngFileUpload',
       'angularGrid',
+      'validation.match',
       'root-controller',
       'login-controller',
       'register-controller',
@@ -20,6 +21,7 @@
       'activity-controller',
       'transaction-controller',
       'jqdatepicker',
+      'match-directive',
       'category-filter',
       'product-template',
       'product-type-template',
@@ -174,6 +176,9 @@
             }).state("account.redeem", {
                 url: "/redeem",
                 templateUrl: 'templates/redeem.html'
+            }).state("account.changepassword", {
+                url: "/changepassword",
+                templateUrl: 'templates/changepassword.html'
             }).state("verify", {
                 url: "/user/verify/?emailToken",
                 templateUrl: 'templates/verify.html'
@@ -195,6 +200,9 @@
             }).state("contact", {
                 url: "/contact",
                 templateUrl: 'templates/contact.html'
+            }).state("search", {
+                url: "/search/?keyword",
+                templateUrl: 'templates/search.html'
             });
 
             $urlRouterProvider.otherwise(function ($injector, $location) {

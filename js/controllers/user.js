@@ -20,6 +20,15 @@
         	$scope.pageSize = 20;
         	$scope.showNext = true;
         	$scope.showPrev = false;
+        	$scope.showEditProfile = false;
+            $scope.error = {
+                Status: false,
+                Message: ''
+            };
+            $scope.success = {
+                Status: false,
+                Message: ''
+            };
 
             $scope.fetchUserTypes = function() {
                 $http.get(baseUrl + "api/common/usertypes").then(function (results) {
@@ -82,6 +91,9 @@
             			
             			$scope.verifyUser($state.params.emailToken);
             		}
+                } else {
+                	if ($location.path().indexOf("changepassword") !== -1) $scope.page.setTitle("Change Password");
+                	else $scope.page.setTitle("Forgot Password");
                 }
             };
             
@@ -109,6 +121,15 @@
             
             $scope.changePassword = function(reset) {
             	$http.post(baseUrl + "api/account/changepassword?emailToken=" + encodeURIComponent($state.params.emailToken) + "&password=" + reset.Password).then(function (results) {
+            		$scope.success = {
+                        Status: true,
+                        Message: 'Your password has been updated, please try login again.'
+                    };
+		        });
+            };
+            
+            $scope.changePasswordAuth = function(reset) {
+            	$http.post(baseUrl + "api/account/changepassword/auth?token=" + $scope.token.Token, JSON.stringify(reset)).then(function (results) {
             		$scope.success = {
                         Status: true,
                         Message: 'Your password has been updated, please try login again.'
@@ -159,6 +180,34 @@
             	if ($scope.offset > 0) $scope.showPrev = true;
             	else $scope.showPrev = false;
             }, true);
+            
+            $scope.editProfile = function() {
+            	$scope.user = angular.copy($scope.token.User);
+            	$scope.showEditProfile = true;
+            };
+            
+            $scope.cancelProfile = function() {
+            	$scope.showEditProfile = false;
+            };
+            
+            $scope.updateUser = function(user) {
+            	$http.post(baseUrl + "api/user?token=" + $scope.token.Token, JSON.stringify(user)).success(function (results) {
+            		$scope.token.User = results;
+            		$scope.showEditProfile = false;
+            		
+            		localStorage.setItem("offerpal_token", JSON.stringify($scope.token));
+        		    
+        		    $scope.success = {
+                        Status: true,
+                        Message: 'Your profile data has been updated.'
+                    };
+		        }).error(function (data, status, headers, config) {
+		        	$scope.error = {
+                        Status: true,
+                        Message: "Invalid username and password combination."
+                    };
+		        });
+            };
         }
     ]);
 })();

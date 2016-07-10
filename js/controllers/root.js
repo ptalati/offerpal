@@ -11,6 +11,7 @@
         	$scope.actionMenu = false;
         	$scope.counter = 5;
         	$scope.balance = {};
+        	$scope.stores = [];
         	
         	$scope.$on('cfpLoadingBar:completed', function () {
                 console.log('Loading Finished');
@@ -25,6 +26,12 @@
         		    $scope.categories = results.data;
 		        });
 	        };
+        	
+	        $scope.fetchStores = function() {
+	        	$http.get(baseUrl + "api/store?pageSize=-1").then(function (results) {
+        		    $scope.stores = results.data;
+		        });
+	        };
 	        
 	        $scope.fetchUser = function () {
                 if (localStorage.getItem("offerpal_token")) {
@@ -35,7 +42,7 @@
 	        $scope.fetchBalance = function () {
 	        	console.log($rootScope.token);
 	        	
-                if ($rootScope.token !== null) {
+                if (typeof $rootScope.token !== "undefined" && $rootScope.token !== null) {
                 	$http.get(baseUrl + "api/account/balance?token=" + $rootScope.token.Token).then(function (results) {
             		    $scope.balance = results.data;
     		        });
@@ -49,7 +56,9 @@
 	        
 	        $scope.loadData = function() {
 	        	$scope.fetchCategories();
+	        	$scope.fetchStores();
 	        	$scope.fetchUser();
+	        	$scope.fetchBalance();
 	        };
 	        
 	        $rootScope.$watch('token', function(newVal, oldVal) {
@@ -95,6 +104,8 @@
                 if ($location.path() === '/' || $location.path().indexOf("admin") !== -1) $scope.page.setTitle('Cashback Offers, Discount Coupons, Best Online Deals');
                 if ($location.path().indexOf("redirect") !== -1) var countDown = $timeout($scope.onCountDown,1000);
                 if ($location.path() === "/" || $location.path() === "") $scope.fetchBalance();
+                
+                $scope.fetchUser();
             });
             
             $scope.refreshSlider = function() {
@@ -195,6 +206,10 @@
                 $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
                 
                 return $slug.toLowerCase();
+            };
+            
+            $scope.searchOffers = function(s) {
+            	$state.go("search", { keyword: s.Keyword });
             };
 	    }
 	]);

@@ -1,12 +1,12 @@
 <div ng-controller="ActivityController" ng-init="loadDefault()">
 	<h1>Activities</h1>
 	
+	<div class="alert alert-danger" role="alert" ng-show="error.Status">{{error.Message}}</div>
+	<div class="alert alert-success" role="alert" ng-show="success.Status"><p ng-bind-html="renderHtml(success.Message)"></p></div>
+ 
 	<div class="accept-activity" ng-show="acceptActivityShow">
 		<h3>Accept Activity</h3>
 		
-		<div class="alert alert-danger" role="alert" ng-show="error.Status">{{error.Message}}</div>
-		<div class="alert alert-success" role="alert" ng-show="success.Status"><p ng-bind-html="renderHtml(success.Message)"></p></div>
-  
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<p>User: {{activity.User.FirstName}} {{activity.User.LastName}}</p>

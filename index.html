@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="format-detection" content="telephone=no" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     
 	<title data-ng-bind="page.title"></title>
 	
@@ -41,6 +41,7 @@
 	<script type="text/javascript" src="js/ng-file-upload-shim.min.js"></script>
 	<script type="text/javascript" src="js/ng-file-upload.min.js"></script>
 	<script type="text/javascript" src="js/angulargrid.min.js"></script>
+	<script type="text/javascript" src="js/angular-validation-match.min.js"></script>
 	<script type="text/javascript" src="js/lightslider.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/controllers/root.js"></script>
@@ -53,6 +54,7 @@
 	<script type="text/javascript" src="js/controllers/activity.js"></script>
 	<script type="text/javascript" src="js/controllers/transaction.js"></script>
 	<script type="text/javascript" src="js/directives/datepicker.js"></script>
+	<script type="text/javascript" src="js/directives/match.js"></script>
 	<script type="text/javascript" src="js/directives/product.js"></script>
 	<script type="text/javascript" src="js/directives/product-type.js"></script>
 	<script type="text/javascript" src="js/directives/offer-button.js"></script>
@@ -87,12 +89,12 @@
                 <div class="col-md-3"><h1 id="logo"><a ui-sref="welcome"><img ng-src="{{logoLoad('logo.png')}}" alt="offerpal" /></a></h1></div>
 				
 				<div class="col-md-9 search-box">
-					<form class="form-inline">
+					<form class="form-inline" name="searchForm" ng-submit="searchForm.$valid && searchOffers(search)">
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search for...">
+							<input type="text" name="s" class="form-control" placeholder="Search for..." ng-model="search.Keyword" />
 							
 							<span class="input-group-btn">
-								<button class="btn btn-default" type="button">Go!</button>
+								<button class="btn btn-default" type="submit">Go!</button>
 							</span>
 					    </div><!-- /input-group -->
 					    
@@ -102,12 +104,12 @@
 					    </div>
 					    
 					    <div class="btn-group" role="group" aria-label="First group" ng-show="token !== null">
-						    <a class="btn btn-success" title="Available Balance"><strong>{{balance.AvailablePoints | currency:"&#8377;":2}}</strong></a>
-						    <a class="btn btn-danger" title="Pending Balance"><strong>{{balance.PendingPoints | currency:"&#8377;":2}}</strong></a>
+						    <a ui-sref="account.wallet" class="btn btn-success" title="Available Balance"><strong>{{balance.AvailablePoints | currency:"&#8377;":2}}</strong></a>
+						    <a ui-sref="account.wallet" class="btn btn-danger" title="Pending Balance"><strong>{{balance.PendingPoints | currency:"&#8377;":2}}</strong></a>
 					    </div>
 					    
 					    <div class="btn-group" ng-show="token !== null">
-							<button type="button" class="btn btn-default">Hi, <strong>{{getUserDisplayName(token.User)}}</strong></button>
+							<button type="button" class="btn btn-default"><span ui-sref="account">Hi, <strong>{{getUserDisplayName(token.User)}}</strong></span></button>
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<span class="caret"></span>
 								<span class="sr-only">Toggle Dropdown</span>

@@ -131,7 +131,6 @@
                 	}
                 } else {
                 	$scope.fetchStores();
-                	$scope.page.setTitle("Stores");
                 }
             };
             
@@ -271,6 +270,7 @@
 	        $scope.loadStores = function() {
 	        	$http.get(baseUrl + "api/store?pageSize=-1").then(function (results) {
         		    $scope.stores = results.data;
+        		    $scope.page.setTitle("Stores");
 		        });
 	        };
         }

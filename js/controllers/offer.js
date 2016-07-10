@@ -19,7 +19,7 @@
             };
         	$scope.imageUpload = true;
         	$scope.offset = 0;
-        	$scope.pageSize = 20;
+        	$scope.pageSize = 12;
         	$scope.showMore = true;
         	$scope.showNext = true;
         	$scope.showPrev = false;
@@ -43,8 +43,10 @@
             };
 
             $scope.fetchOffers = function() {
-                $http.get(baseUrl + "api/offer").then(function (results) {
+                $http.get(baseUrl + "api/offer?pageSize=" + $scope.pageSize).then(function (results) {
         		    $scope.offers = results.data;
+        		    
+        		    if ($scope.offers.length < $scope.pageSize) $scope.showMore = false;
 		        });
             };
 
@@ -127,8 +129,6 @@
             };
 
             $scope.loadDefault = function() {
-                $scope.fetchOffersAll();
-                
                 console.log($state.params.offerId);
                 
                 if ($state.params.offerId) {
@@ -139,6 +139,9 @@
                 	if ($state.params.offerId > 0) {
                 		$scope.fetchOffer($state.params.offerId);
                 	}
+                } else {
+                	$scope.fetchOffersAll();
+                	$scope.page.setTitle("Offers");
                 }
             };
             
@@ -151,6 +154,7 @@
                 	}
                 } else {
             		$scope.fetchOffers();
+            		$scope.page.setTitle("Popular Offers");
             	}
             };
             
@@ -305,6 +309,16 @@
             	$http.get(baseUrl + "api/offer?pageSize=12&featured=false").then(function (results) {
     		    	$scope.offers = results.data;
 		        });
+            };
+            
+            $scope.loadSearch = function() {
+            	$http.get(baseUrl + "api/offer/search?keyword=" + $state.params.keyword + "&pageSize=12&featured=false").then(function (results) {
+    		    	$scope.offers = results.data;
+        		    
+        		    if ($scope.offers.length < $scope.pageSize) $scope.showMore = false;
+		        });
+            	
+            	$scope.page.setTitle("Search Result");
             };
         }
     ]);

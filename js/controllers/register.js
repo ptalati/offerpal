@@ -52,6 +52,22 @@
             };
 
             $scope.getClientIPAddress();
+
+            $scope.loadDefault = function () {
+                //localStorage.clear();
+                console.log(localStorage);
+                
+                $scope.page.setTitle("Register");
+
+                if (localStorage.getItem("offerpal_token")) {
+                    $scope.success = {
+                        Status: true,
+                        Message: 'You are already logged in!'
+                    };
+
+                    $state.go("welcome");
+                }
+            };
         }
     ]);
 })();

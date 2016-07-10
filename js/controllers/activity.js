@@ -63,6 +63,11 @@
             	
             	$http.post(baseUrl + "api/transaction?token=" + $scope.token.Token, JSON.stringify(transaction)).success(function (results) {
             		$scope.acceptActivityShow = false;
+            		
+            		$scope.success = {
+                        Status: true,
+                        Message: "Activity accepted and transaction record created."
+                    };
 		        }).error(function (data, status, headers, config) {
 		        	$scope.error = {
                         Status: true,

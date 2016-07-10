@@ -44,6 +44,56 @@
     		        });
             	}
             };
+            
+            $scope.acceptTransaction = function(transaction) {
+            	if (confirm("Do you want to accept?")) {
+            		$http.post(baseUrl + "api/transaction/accept?token=" + $scope.token.Token + "&transactionId=" + transaction.Id).success(function (results) {
+            			console.log("Transaction accepted");
+            			
+            			transaction.Status = {
+            				"Id": 2,
+            				"Name": "Available"
+            			};
+            			
+            			$scope.success = {
+                            Status: true,
+                            Message: "Transaction accepted."
+                        };
+    		        }).error(function (data, status, headers, config) {
+    		        	$scope.error = {
+	                        Status: true,
+	                        Message: data.ExceptionMessage
+	                    };
+	            		
+	                    console.log("Error [accept transaction] - " + status);
+	                });
+            	}
+            };
+            
+            $scope.rejectTransaction = function(transaction) {
+            	if (confirm("Do you want to reject?")) {
+            		$http.post(baseUrl + "api/transaction/reject?token=" + $scope.token.Token + "&transactionId=" + transaction.Id).success(function (results) {
+            			console.log("Transaction rejected");
+            			
+            			transaction.Status = {
+            				"Id": 3,
+            				"Name": "Rejected"
+            			};
+            			
+            			$scope.success = {
+                            Status: true,
+                            Message: "Transaction rejected."
+                        };
+    		        }).error(function (data, status, headers, config) {
+    		        	$scope.error = {
+	                        Status: true,
+	                        Message: data.ExceptionMessage
+	                    };
+	            		
+	                    console.log("Error [reject transaction] - " + status);
+	                });
+            	}
+            };
         }
     ]);
 })();

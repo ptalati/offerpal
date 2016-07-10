@@ -29,7 +29,9 @@
                 };
 
                 $http.post(baseUrl + "api/account/login?email=" + login.Email, JSON.stringify(login)).success(function (result) {
+                	console.log(result);
                 	if (result.Id > 0) {
+                		console.log('1');
                 		if (result.User.EmailConfirmed) {
 		                    $scope.success = {
 		                        Status: true,
@@ -49,6 +51,7 @@
                             };
                 		}
                 	} else {
+                		console.log('2');
                 		$scope.error = {
                             Status: true,
                             Message: "Invalid username and password combination."
@@ -74,6 +77,8 @@
             $scope.loadDefault = function () {
                 //localStorage.clear();
                 console.log(localStorage);
+                
+                $scope.page.setTitle("Login");
 
                 if (localStorage.getItem("offerpal_token")) {
                     $scope.success = {

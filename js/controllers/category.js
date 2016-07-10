@@ -17,7 +17,7 @@
             };
         	$scope.offset = 0;
         	$scope.showMore = true;
-        	$scope.pageSize = 20;
+        	$scope.pageSize = 12;
         	$scope.showNext = true;
         	$scope.showPrev = false;
 
@@ -25,8 +25,10 @@
             	categoryId = categoryId || 0;
             	storeId = storeId || 0;
             	
-                $http.get(baseUrl + "api/offer?categoryId=" + categoryId + "&storeId=" + storeId).then(function (results) {
+                $http.get(baseUrl + "api/offer?categoryId=" + categoryId + "&storeId=" + storeId + "&pageSize=" + $scope.pageSize).then(function (results) {
         		    $scope.offers = results.data;
+        		    
+        		    if ($scope.offers.length < $scope.pageSize) $scope.showMore = false;
 		        });
             };
 
@@ -97,11 +99,13 @@
             	
             	console.log($scope.offset);
             	
-            	$http.get(baseUrl + "api/offer?categoryId=" + $scope.category.Id + "&offset=" + $scope.offset).then(function (results) {
+            	$http.get(baseUrl + "api/offer?categoryId=" + $scope.category.Id + "&offset=" + $scope.offset + "&pageSize=" + $scope.pageSize).then(function (results) {
             		if (results.data.length > 0) {
 	        		    $.each(results.data, function(index, value) {
 	        		    	$scope.offers.push(value);
 	        		    });
+	        		    
+	        		    if (results.data.length < $scope.pageSize) $scope.showMore = false;
             		} else {
             			$scope.showMore = false;
             		}

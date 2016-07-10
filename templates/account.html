@@ -17,6 +17,66 @@
 		<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
 			<div ui-view>
 				<h1>Account</h1>
+				
+				<div class="account-info row" ng-controller="UserController">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<h4>Account Information <a href="javascript:void(0);" ng-click="editProfile()" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></h4>
+						
+						<div class="alert alert-danger" role="alert" ng-show="error.Status">{{error.Message}}</div>
+						<div class="alert alert-success" role="alert" ng-show="success.Status"><p ng-bind-html="renderHtml(success.Message)"></p></div>
+						  
+						<div ng-hide="showEditProfile">
+							<p>Name: {{token.User.FirstName}} {{token.User.LastName}}</p>
+							
+							<p>Email: {{token.User.Email}}</p>
+							
+							<p>Phone: {{token.User.Phone}}</p>
+						</div>
+						
+						<div ng-show="showEditProfile">
+							<form name="editNameForm" ng-submit="editNameForm.$valid && updateUser(user)">
+								<div class="row">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label for="FirstName">First Name</label>
+											<input type="text" class="form-control" id="FirstName" placeholder="First Name" ng-model="user.FirstName" ng-required="true" />
+										</div>
+									</div>
+									
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label for="LastName">Last Name</label>
+											<input type="text" class="form-control" id="LastName" placeholder="Last Name" ng-model="user.LastName" ng-required="true" />
+										</div>
+									</div>
+									
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="form-group">
+											<label for="LastName">Email</label><br />
+											<p>{{token.User.Email}}</p>
+										</div>
+									</div>
+									
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label for="Phone">Phone</label>
+											<input type="text" class="form-control" id="Phone" placeholder="Phone" ng-model="user.Phone" />
+										</div>
+									</div>
+								</div>
+								
+								<button type="submit" class="btn btn-default">Update</button>
+								<button type="button" class="btn btn-default" ng-click="cancelProfile()">Cancel</button>
+							</form> 
+						</div>
+					</div>
+					
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<h4>Account Actions</h4>
+						
+						<p><a ui-sref=".changepassword">Change Password</a></p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1167,3 +1167,25 @@ h4 {
 	width: 100%;
 	height: auto;
 }
+
+.account-info .col-lg-4,
+.account-info .col-md-4,
+.account-info .col-sm-4 {
+	padding-right: 0;
+}
+
+.redeem .thumbnail img {
+	margin: 5px 0;
+}
+.redeem .thumbnail .caption {
+	background: #eee;
+	text-align: center;
+	font-weight: bold;
+}
+.redeem .thumbnail .caption.processing {
+	font-size: 80%;
+	padding: 3px;
+	color: #fff;
+	background: #999;
+	text-transform: uppercase;
+}

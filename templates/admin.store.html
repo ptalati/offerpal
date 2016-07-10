@@ -4,7 +4,7 @@
 	<form name="storeForm" ng-submit="storeForm.$valid && saveStore(store)">
 		<div class="form-group">
 			<label for="Name">Name</label>
-			<input type="text" class="form-control" id="Name" placeholder="Name" ng-model="store.Name" />
+			<input type="text" class="form-control" id="Name" placeholder="Name" ng-model="store.Name" ng-required="true" />
 		</div>
 		
 		<div class="form-group" ng-show="store.Name.length > 0">
@@ -25,12 +25,12 @@
 		
 		<div class="form-group">
 			<label for="Slogan">Slogan</label>
-			<input type="text" class="form-control" id="Slogan" placeholder="Slogan" ng-model="store.Slogan" />
+			<input type="text" class="form-control" id="Slogan" placeholder="Slogan" ng-model="store.Slogan" ng-required="true" />
 		</div>
 		
 		<div class="form-group">
 			<label for="Url">Url</label>
-			<input type="text" class="form-control" id="Url" placeholder="Url" ng-model="store.Url" />
+			<input type="text" class="form-control" id="Url" placeholder="Url" ng-model="store.Url" ng-required="true" />
 		</div>
 		
 		<div class="form-group">
@@ -46,14 +46,14 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="form-group">
 					<label for="AffiliateKey">Affiliate Key</label>
-					<input type="text" class="form-control" id="AffiliateKey" placeholder="Affiliate Key" ng-model="store.AffiliateKey" />
+					<input type="text" class="form-control" id="AffiliateKey" placeholder="Affiliate Key" ng-model="store.AffiliateKey" ng-required="true" />
 				</div>
 			</div>
 			
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="form-group">
 					<label for="AffiliateValue">Affiliate Value</label>
-					<input type="text" class="form-control" id="AffiliateValue" placeholder="Affiliate Value" ng-model="store.AffiliateValue" />
+					<input type="text" class="form-control" id="AffiliateValue" placeholder="Affiliate Value" ng-model="store.AffiliateValue" ng-required="true" />
 				</div>
 			</div>
 		</div>
